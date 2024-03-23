@@ -1,0 +1,16 @@
+{
+	"divprofilegames": "PARTIES JOUEES",
+	"divprofilewons": "PARTIES GAGNEES",
+	"divprofilescore": "SCORE",
+	"vsbtn": "1 contre 1",
+	"aibtn": "1 contre AI",
+	"modbtn": "1 contre 1 avec mod",
+	"tourbtn": "Tournoi",
+	"startbtn": "Commencer",
+	"pausebtn": "Pause",
+	"quitbtn": "Quitter",
+	"quit2btn": "Quitter",
+	"quit3btn": "Quitter",
+	"ngbtn": "Nouvelle Partie",
+	"nextbtn": "Partie Suivante"
+}
