@@ -1,5 +1,8 @@
-# 42_ft_transcendence
 # ft_transcendence
+
+
+[![vfuster-'s 42 Inception Score](https://badge42.coday.fr/api/v2/cltpx5zqv531101p4bte37ts1/project/3469182)](https://github.com/Coday-meric/badge42)
+le 30 mai 2024
 
 ![-----------------------------------------------------](https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/rainbow.png)
 
