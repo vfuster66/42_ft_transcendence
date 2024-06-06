@@ -22,10 +22,6 @@ Si j'ai un conseil à vous donner, prenez bien le temps, de réfléchir aux modu
 Certains ont choisi d'héberger leur site, ce qui n'a pas été notre cas, nous avons juste pris un nom de domaine et les certificats ssl afin que le site soit sécurisé, allez voir les offres du github package, vous trouverez de quoi faire l'un ou l'autre gratuitement.
 
 
-## Schéma Fonctionnel du Jeu Pong3D.
- 
-<img width="734" alt="Capture d’écran 2024-05-05 à 16 46 55" src="https://github.com/sekhmet007/FT_transcendence/assets/114764032/19998953-9120-4532-bf20-64bc929c72f2">
-
 <a id="summary"></a>
 <hr>
 <details><summary>Partie obligatoire</summary>
