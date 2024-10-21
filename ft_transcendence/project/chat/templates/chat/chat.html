@@ -1,0 +1,724 @@
+
+<!-- chat/templates/chat/chat.html -->
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<style>
+    body {
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('/static/images/background_2.png');
+        background-size: cover;
+        color: #001aa0;
+    }
+    h1 {
+        font-size: 4rem;
+        text-align: center;
+    }
+    #chat-log {
+		height: 300px;
+		overflow-y: scroll;
+		background-color: #f5f5f5;
+		padding: 0;
+		border: 1px solid #ccc;
+		margin-top: 20px;
+		margin-left: 10px;
+		margin-right: 10px;
+		border-radius: 10px;
+	}
+	#chat-log div {
+		padding: 5px;
+		overflow-y: auto;
+		max-height: 100%;
+		border-radius: 10px;
+    }
+    #chat-log .message-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+    }
+    #chat-log .message-content {
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+    }
+    #chat-log .text {
+        display: inline;
+    }
+    #chat-log .timestamp {
+        flex-shrink: 0;
+        color: #32C0C1;
+        width: auto;
+        margin-left: 10px;
+    }
+    #chat-log .username {
+        color: #32C0C1;
+    }
+    #chat-log .username:after {
+        content: " :";
+        margin-right: 5px;
+    }
+    #chat-message-submit {
+		background-color: #001aa0;
+		color: white;
+	}
+	#chat-message-submit:hover {
+		background-color: white;
+		color: #001aa0;
+	}
+    #invitation-text {
+        margin-left: 10px;
+        padding-left: 5px;
+        color: #001aa0;
+        font-size: 1rem;
+    }
+    .actions-container {
+        display: flex;
+        justify-content: space-around;
+    }
+    .block-game-group, .pong-game-group {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #block-input-container, #game-input-container {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    #block-text,
+    #game-invitation-text {
+        margin-left: 10px;
+        margin-top: 20px;
+        padding-left: 5px;
+        color: #001aa0;
+        font-size: 1rem;
+    }
+    #user-input-container {
+        display: flex;
+        width: 40%;
+        align-items: center;
+        padding: 10px;
+    }
+
+    #user-input-container input[type="text"] {
+        flex-grow: 1;
+        margin-right: 10px;
+        height: 35px;
+        border-radius: 5px;
+    }
+    #user-input-container #button-container {
+        display: flex;
+    }
+    #user-input-container button {
+        background-color: #001aa0;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        margin-right: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100px;
+    }
+    #user-input-container button:hover {
+        background-color: white;
+        color: #001aa0;
+    }
+    #block-input-container input[type="text"],
+    #game-input-container input[type="text"] {
+        width: 20%;
+        border-radius: 5px;
+        height: 35px;
+        margin-left: 10px;
+        width: 250px;
+    }
+    #block-input-container button,
+    #game-input-container button {
+        background-color: #001aa0;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        margin-right: 5px;
+        border-radius: 5px;
+        cursor: pointer;
+        width: 100px;
+    }
+    #block-input-container button:hover,
+    #game-input-container button:hover {
+        background-color: white;
+        color: #001aa0;
+    }
+    .fixed-button-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+        text-align: center;
+    }
+    .fixed-button-container a {
+        background-color: #001aa0;
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+    }
+    .fixed-button-container a:hover {
+        background-color: white;
+        color: #001aa0;
+    }
+    .container-fluid {
+        margin-top: 50px;
+    }
+    .game-invitations {
+        background-color: #f9f9f9;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+    .invitation {
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+            margin-top: 50px;
+        }
+        .fixed-button-container a {
+            font-size: 1.2rem;
+        }
+        .fixed-button-container {
+            margin-top: 50px;
+            position: relative;
+            bottom: auto;
+            left: auto;
+            right: auto;
+            padding: 8px 0;
+        }
+        #user-input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        #button-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        #user-input {
+            width: 90%;
+            margin-bottom: 10px;
+        }
+        button {
+            margin: 0 5px;
+        }
+        .container-fluid {
+            margin-top: 20px;
+        }
+        .actions-container {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        #block-input-container, #game-input-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+        }
+        #block-button-container, #game-button-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+        input[type="text"] {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+    }
+
+</style>
+
+<body>
+
+    <div class="language-switcher">
+		<button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			{% translate "Language" %}
+		</button>
+		<form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+			{% csrf_token %}
+			<input name="next" type="hidden" value="{{ request.path }}">
+			<button type="submit" name="language" value="en" class="dropdown-item">
+				<img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+			</button>
+			<button type="submit" name="language" value="fr" class="dropdown-item">
+				<img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+			</button>
+			<button type="submit" name="language" value="es" class="dropdown-item">
+				<img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+			</button>
+		</form>
+	</div>
+
+    <h1>{% trans 'ChatRoom :' %} {{ room_name }}</h1>
+
+    {% if room_is_private %}
+
+        <div id="invitation-text">
+            {% trans "Invite to the room" %}
+        </div>
+
+        <div id="user-input-container">
+            <input type="text" id="user-input" placeholder="{% trans ' Username' %}">
+            <div id="button-container">
+                <button id="invite-user-submit">{% trans 'Add' %}</button>
+                <button id="remove-user-submit">{% trans 'Remove' %}</button>
+            </div>
+        </div>        
+        
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var inviteUserSubmit = document.querySelector('#invite-user-submit');
+                var removeUserSubmit = document.querySelector('#remove-user-submit');
+                var userInput = document.querySelector('#user-input');
+
+                inviteUserSubmit.onclick = function(e) {
+                    var username = userInput.value.trim();
+                    if (username) {
+                        console.log("Envoi d'une invitation à :", username);
+                        chatSocket.send(JSON.stringify({
+                            command: 'invite',
+                            username: username,
+                            room_name: roomName
+                        }));
+                        userInput.value = '';
+                        console.log("Invitation envoyée à " + username + ", champ réinitialisé.");
+                    } else {
+                        console.error("Aucun nom d'utilisateur fourni pour l'invitation.");
+                    }
+                };
+
+                removeUserSubmit.onclick = function(e) {
+                    var username = userInput.value.trim();
+                    if (username) {
+                        console.log("Tentative de retrait de l'utilisateur :", username);
+                        chatSocket.send(JSON.stringify({
+                            command: 'remove_member',
+                            username: username,
+                            room_name: roomName
+                        }));
+                        userInput.value = '';
+                        console.log("Demande de retrait envoyée pour " + username);
+                    } else {
+                        console.error("Aucun nom d'utilisateur fourni pour le retrait.");
+                    }
+                };
+            });
+        </script>
+    {% endif %}
+
+    <div id="chat-log"></div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-9">
+                    <input type="text" id="chat-message-input" class="form-control" placeholder="{% trans 'Type a message...' %}" autofocus>
+                </div>
+                <div class="col-2">
+                    <div class="d-flex">
+                        <button id="chat-message-submit" class="btn btn-primary btn-block flex-grow-1">
+                            {% trans "Send" %}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="actions-container">
+
+        <div class="block-game-group">
+
+            <div id="block-text">
+                {% trans "Block User" %}
+            </div>
+
+            <div id="block-input-container">
+                <input type="text" id="block-input" placeholder="{% trans ' Username' %}">
+                <div id="block-button-container">
+                    <button id="block-user-submit">{% trans 'Block' %}</button>
+                    <button id="unblock-user-submit">{% trans 'Unblock' %}</button>
+                </div>
+            </div>
+
+            <script>
+                var roomName = "{{ room_name }}";
+                document.addEventListener('DOMContentLoaded', function () {
+                    var blockUserSubmit = document.querySelector('#block-user-submit');
+                    var unblockUserSubmit = document.querySelector('#unblock-user-submit');
+                    var blockUserInput = document.querySelector('#block-input');
+            
+                    blockUserSubmit.onclick = function(e) {
+                        var username = blockUserInput.value.trim();
+                        if (username) {
+                            console.log("Tentative de blocage de l'utilisateur :", username);
+                            chatSocket.send(JSON.stringify({
+                                command: 'block_user',
+                                username: username,
+                                room_name: roomName
+                            }));
+                            blockUserInput.value = '';
+                            console.log("Blocage demandé pour " + username);
+                        } else {
+                            console.error("Aucun nom d'utilisateur fourni pour le blocage.");
+                        }
+                    };
+            
+                    unblockUserSubmit.onclick = function(e) {
+                        var username = blockUserInput.value.trim();
+                        if (username) {
+                            console.log("Tentative de déblocage de l'utilisateur :", username);
+                            chatSocket.send(JSON.stringify({
+                                command: 'unblock_user',
+                                username: username,
+                                room_name: roomName 
+                            }));
+                            blockUserInput.value = '';
+                            console.log("Déblocage demandé pour " + username);
+                        } else {
+                            console.error("Aucun nom d'utilisateur fourni pour le déblocage.");
+                        }
+                    };
+                });
+            </script>
+        </div>
+
+        <div class="pong-game-group">
+            <div id="game-invitation-text">
+                {% trans "Invite to play" %}
+            </div>
+            <div id="game-input-container">
+                <input type="text" id="game-user-input" placeholder="{% trans 'Username' %}">
+                <select id="game-select-input" class="form-select">
+                    <option value="pandapong_2d">{% trans 'PandaPong 2D' %}</option>
+                    <option value="pandapong_3d">{% trans 'PandaPong 3D' %}</option>
+                    <option value="pandapong_api_2d">{% trans 'PandaPong API 2D' %}</option>
+                    <option value="invaders">{% trans 'Invaders' %}</option>
+                </select>
+                <div id="game-button-container">
+                    <button id="invite-to-game-submit">{% trans 'Invite' %}</button>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <!-- Modal pour le profil utilisateur -->
+    <div class="modal fade" id="userProfileModal" tabindex="-1" aria-labelledby="userProfileModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="userProfileModalLabel">Profil de l'utilisateur</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="profileDetails">
+                </div>
+            </div>
+        </div>
+    </div>    
+    
+    <!-- Modal Invitation Pong Game -->
+    <div class="modal fade" id="pongGameInvitationModal" tabindex="-1" aria-labelledby="pongGameInvitationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="pongGameInvitationModalLabel">Invitation à jouer</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p id="game-invite-message">Vous avez été invité à jouer une partie de <span id="game-name"></span> par <span id="inviter-name"></span>.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Refuser</button>
+                    <button type="button" class="btn btn-primary" id="accept-game-invite">Accepter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="fixed-button-container">
+        <a href="{% url 'room_list' %}" class="btn btn-primary">
+            {% trans "Return to Room List" %}
+        </a>
+    </div>
+
+</body>
+
+<script>
+    var roomName = "{{ room_name }}";
+    console.log("Nom de la salle chargé :", roomName);
+
+    var chatSocket = new WebSocket('wss://' + window.location.host + '/ws/chat/' + roomName + '/');
+
+    chatSocket.onopen = function(e) {
+        console.log('Connexion WebSocket ouverte.');
+        loadMessages();
+    };
+
+    // WebSocket onmessage handler
+    chatSocket.onmessage = function(event) {
+        console.log("Message WebSocket reçu :", event.data); // Ajout d'un log pour vérifier le message reçu
+        var data;
+        
+        try {
+            data = JSON.parse(event.data);
+            console.log("Traitement du message de type :", data.type); // Ajout d'un log pour vérifier le type de message
+            console.log("Données du message JSON après parsing :", data); // Ajout d'un log pour vérifier le contenu après parsing
+        } catch (error) {
+            console.error("Erreur de parsing des données JSON du message WebSocket :", error);
+            return;
+        }
+        
+        switch(data.type) {
+            case 'chat_message':
+                handleChatMessage(data);
+                break;
+            case 'user_kicked':
+                handleUserKicked(data);
+                break;
+            case 'error':
+                handleError(data);
+                break;
+            case 'info':
+                handleInfo(data);
+                break;
+            case 'game_invite':
+                handleGameInvite(data);
+                break;
+            case 'invitation_status':
+                handleInvitationStatus(data);
+                break;
+            default:
+                console.error('Type de message inconnu reçu:', data);
+                break;
+        }
+    };
+
+    chatSocket.onclose = function(e) {
+        console.error('Connexion WebSocket fermée inopinément.', 'Code de fermeture:', e.code, 'Raison:', e.reason);
+    };
+
+    chatSocket.onerror = function(error) {
+        console.error('Erreur WebSocket:', error);
+    };
+
+    document.querySelector('#chat-message-submit').onclick = function(e) {
+        var messageInput = document.querySelector('#chat-message-input');
+        var message = messageInput.value.trim();
+        if (message) {
+            console.log("Envoi du message :", message);
+            chatSocket.send(JSON.stringify({
+                type: 'chat_message',
+                message: message,
+                room_name: roomName
+            }));
+            messageInput.value = '';
+            console.log("Champ de message nettoyé après l'envoi.");
+        } else {
+            console.error("Aucun message à envoyer.");
+        }
+    };
+
+    document.getElementById('invite-to-game-submit').addEventListener('click', function() {
+        console.log("Bouton d'invitation au jeu cliqué");
+
+        var inviteeUsername = document.getElementById('game-user-input').value;
+        console.log("Nom d'utilisateur invité saisi:", inviteeUsername);
+
+        var selectedGame = document.getElementById('game-select-input').value;
+        console.log("Jeu sélectionné:", selectedGame);
+
+        document.getElementById('game-user-input').value = '';
+
+        var data = {
+            command: 'invite_to_game',
+            username: inviteeUsername,
+            room_name: roomName,
+            game: selectedGame
+        };
+
+        console.log('Envoi de la commande d\'invitation au jeu:', data);
+        chatSocket.send(JSON.stringify(data));
+    });
+
+
+    function handleInfo(data) {
+        console.log("Information reçue :", data.message);
+        alert(data.message);
+    }
+
+    function handleUserKicked(data) {
+        alert(data.message);
+    }
+
+    function handleError(data) {
+        console.error("Erreur reçue:", data.message);
+        alert("Erreur : " + data.message);
+    }
+
+    function handleChatMessage(data) {
+        var chatLog = document.getElementById('chat-log');
+        var messageContent = `
+            <div class="message-line">
+                <span class="message-content">
+                    <span class="username clickable" onclick="fetchUserProfile('${data.username}')">${data.username}</span>
+                    <span class="text">${data.message}</span>
+                </span>
+                <span class="timestamp">${data.timestamp}</span>
+            </div>
+        `;
+        var messageItem = document.createElement('div');
+        messageItem.className = 'message';
+        messageItem.innerHTML = messageContent;
+        chatLog.appendChild(messageItem);
+        chatLog.scrollTop = chatLog.scrollHeight;
+        console.log("Message de chat affiché :", messageContent);
+
+        saveMessageInLocalStorage(data);
+    }
+
+    function fetchUserProfile(username) {
+        $.ajax({
+            url: '/get-user-profile/',
+            type: 'GET',
+            data: { 'username': username },
+            success: function(response) {
+                updateProfileModal(response);
+            },
+            error: function(error) {
+                console.error("Erreur lors de la récupération du profil:", error);
+            }
+        });
+    }
+
+    function updateProfileModal(userProfile) {
+        $('#profileDetails').html(`
+            <div class="card mb-4">
+                <img src="${userProfile.avatarUrl}" alt="Avatar de ${userProfile.username}" class="img-fluid rounded-circle profil-avatar-img">
+                <div class="card-body">
+                    <h4 class="card-title">${userProfile.username}</h4>
+                    <p class="card-text">Statut: ${userProfile.status}</p>
+                    <p class="card-text">${userProfile.bio}</p>
+                </div>
+            </div>
+        `);
+        $('#userProfileModal').modal('show');
+    }
+
+
+    function saveMessageInLocalStorage(data) {
+        var messages = JSON.parse(localStorage.getItem('chatMessages-' + roomName)) || [];
+        messages.push(data);
+        localStorage.setItem('chatMessages-' + roomName, JSON.stringify(messages));
+    }
+
+    function loadMessages() {
+        console.log("Chargement des messages depuis le localStorage.");
+        var messages = JSON.parse(localStorage.getItem('chatMessages-' + roomName)) || [];
+        var chatLog = document.getElementById('chat-log');
+        messages.forEach(function(msg) {
+            var messageContent = `
+                <div class="message-line">
+                    <span class="message-content">
+                        <span class="username clickable">${msg.username}</span>
+                        <span class="text">${msg.message}</span>
+                    </span>
+                    <span class="timestamp">${msg.timestamp}</span>
+                </div>
+            `;
+            var messageItem = document.createElement('div');
+            messageItem.className = 'message';
+            messageItem.innerHTML = messageContent;
+            chatLog.appendChild(messageItem);
+            console.log("Message chargé et affiché :", msg);
+        });
+        chatLog.scrollTop = chatLog.scrollHeight;
+    }
+
+
+    function handleGameInvite(data) {
+        console.log("handleGameInvite appelé avec les données:", data); // Log initial pour vérifier les données reçues
+
+        // Ajout d'un log pour voir toutes les clés et valeurs dans data
+        for (const key in data) {
+            if (data.hasOwnProperty(key)) {
+                console.log(`Clé: ${key}, Valeur: ${data[key]}`);
+            }
+        }
+
+        // Affichage du nom de l'inviteur
+        document.getElementById('inviter-name').textContent = data.inviter;
+
+        // Affichage direct du nom du jeu sans condition
+        console.log("Valeur originale du jeu:", data.game); // Log pour vérifier la valeur originale de 'game'
+        var gameName = data.game.replace('_', ' ');
+        document.getElementById('game-name').textContent = gameName;
+        console.log("Nom du jeu après remplacement:", gameName); // Log pour vérifier le nom du jeu après 'replace'
+
+        // Affichage de la modal
+        $('#pongGameInvitationModal').modal('show');
+
+        // Gestion des boutons d'acceptation et de refus
+        var acceptButton = document.getElementById('accept-game-invite');
+        var declineButton = document.querySelector('.btn-secondary');
+
+        if (acceptButton && declineButton) {
+            acceptButton.addEventListener('click', function() {
+                console.log("Bouton d'acceptation cliqué"); // Log pour cliquer sur le bouton d'acceptation
+                if (data.invitation_id) {
+                    console.log("ID d'invitation trouvé:", data.invitation_id); // Log pour vérifier l'ID d'invitation
+                    chatSocket.send(JSON.stringify({
+                        command: 'accept_game_invite',
+                        invitation_id: data.invitation_id,
+                        room_name: roomName
+                    }));
+                    $('#pongGameInvitationModal').modal('hide');
+                } else {
+                    console.error("ID d'invitation manquant pour accepter l'invitation au jeu.");
+                }
+            });
+
+            declineButton.addEventListener('click', function() {
+                console.log("Bouton de refus cliqué"); // Log pour cliquer sur le bouton de refus
+                if (data.invitation_id) {
+                    console.log("ID d'invitation trouvé pour refus:", data.invitation_id); // Log pour vérifier l'ID d'invitation pour le refus
+                    chatSocket.send(JSON.stringify({
+                        command: 'decline_game_invite',
+                        invitation_id: data.invitation_id,
+                        room_name: roomName
+                    }));
+                } else {
+                    console.error("ID d'invitation manquant pour décliner l'invitation au jeu.");
+                }
+            });
+        } else {
+            console.error("Bouton(s) d'acceptation ou de déclinaison d'invitation introuvable(s).");
+        }
+    }
+
+    function handleInvitationStatus(data) {
+        console.log("Invitation status received:", data); // Log pour vérifier les données reçues
+
+        var statusMessage = `Your invitation to play ${data.game.replace('_', ' ')} with ${data.invitee} in room ${data.room} has been ${data.status}.`;
+        alert(statusMessage);  // Vous pouvez changer cela pour afficher le message de manière plus élégante
+    }
+
+
+
+</script>
+
+{% endblock %}
+

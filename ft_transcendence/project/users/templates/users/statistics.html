@@ -1,0 +1,165 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('/static/images/background_1.png');
+        background-size: cover;
+        color: #32C0C1;
+    }
+    h1 {
+        font-size: 70px;
+        text-align: center;
+        margin-bottom: 50px;
+        margin-top: 20px;
+    }
+    .fixed-button-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+        text-align: center;
+    }
+    .fixed-button-container a {
+        background-color: #32C0C1;
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+    }
+    .fixed-button-container a:hover {
+        background-color: white;
+        color: #32C0C1;
+    }
+    .stats-container {
+        display: flex;
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+    }
+    .stats-box {
+        flex: 1;
+        margin: 10px;
+        padding: 20px;
+        border: 2px solid #3498db;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.7);
+    }
+    .user-stats {
+        display: flex;
+        flex-direction: column;
+    }
+    .user-stats .stats-box {
+        margin-bottom: 20px;
+    }
+    h2 {
+        color: #3498db;
+        margin-top: 0;
+    }
+    p {
+        font-size: 18px;
+    }
+    .scrollable {
+        max-height: 500px;
+        overflow-y: auto;
+    }
+    @media (max-width: 768px) {
+        .stats-container {
+            flex-direction: column;
+        }
+        .stats-box {
+            width: 90%;
+            margin: 10px auto;
+        }
+    }
+</style>
+
+<body>
+
+    <div class="language-switcher">
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+    
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+    </div>
+
+    <h1>{% trans 'Statistics for' %} {{ user_profile.user.username }}</h1>
+
+    <div class="stats-container">
+        <!-- Container pour les statistiques de l'utilisateur -->
+        <div class="stats-box user-stats">
+            <!-- Cadre pour les statistiques de Pong 2D -->
+            <div class="stats-box">
+                <h2>{% trans 'Pong 2D Statistics' %}</h2>
+                <p>{% trans 'Total Games Played:' %} {{ user_stats.pong2d.total_games }}</p>
+                <p>{% trans 'Total Wins:' %} {{ user_stats.pong2d.total_wins }}</p>
+                <p>{% trans 'Total Losses:' %} {{ user_stats.pong2d.total_losses }}</p>
+                <p>{% trans 'Win/Loss Ratio:' %} {{ user_stats.pong2d.win_loss_ratio|floatformat:2 }}%</p>
+            </div>
+
+            <!-- Cadre pour les statistiques de Invaders -->
+            <div class="stats-box">
+                <h2>{% trans 'Invaders Statistics' %}</h2>
+                <p>{% trans 'Total Games Played:' %} {{ user_stats.invaders.total_games }}</p>
+                <p>{% trans 'Last Score:' %} {{ user_stats.invaders.last_score }}</p>
+                <p>{% trans 'Best Score:' %} {{ user_stats.invaders.best_score }}</p>
+                <p>{% trans 'Average Score:' %} {{ user_stats.invaders.avg_score|floatformat:2 }}</p>
+            </div>
+        </div>
+
+        <!-- Container pour les statistiques des amis -->
+        <div class="stats-box scrollable">
+            <h2>{% trans 'Friends\' Statistics' %}</h2>
+            {% for friend in friends_stats %}
+                <h3>{{ friend.username }}</h3>
+                <p>{% trans 'Pong 2D Statistics' %}:</p>
+                <ul>
+                    <li>{% trans 'Total Games Played:' %} {{ friend.pong2d.total_games }}</li>
+                    <li>{% trans 'Total Wins:' %} {{ friend.pong2d.total_wins }}</li>
+                    <li>{% trans 'Total Losses:' %} {{ friend.pong2d.total_losses }}</li>
+                    <li>{% trans 'Win/Loss Ratio:' %} {{ friend.pong2d.win_loss_ratio|floatformat:2 }}%</li>
+                </ul>
+                <p>{% trans 'Invaders Statistics' %}:</p>
+                <ul>
+                    <li>{% trans 'Total Games Played:' %} {{ friend.invaders.total_games }}</li>
+                    <li>{% trans 'Best Score:' %} {{ friend.invaders.best_score }}</li>
+                    <li>{% trans 'Average Score:' %} {{ friend.invaders.avg_score|floatformat:2 }}</li>
+                </ul>
+            {% empty %}
+                <p>{% trans 'No friends to display.' %}</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Fixed button for returning to homepage -->
+    <div class="fixed-button-container">
+        <a href="{% url 'home' %}" class="btn btn-primary">
+            {% trans "Return to Homepage" %}
+        </a>
+    </div>
+
+</body>
+
+{% endblock %}
+
+

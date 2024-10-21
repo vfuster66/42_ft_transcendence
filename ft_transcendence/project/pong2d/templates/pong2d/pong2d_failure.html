@@ -1,0 +1,95 @@
+
+<!-- pong/templates/pong/pong2d_failure.html -->
+
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: flex-end;
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('{% static "images/perdant_2.png" %}');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        height: 100vh;
+        margin-right: 20px;
+        padding: 20px 0;
+    }
+    h1 {
+        color: #32C0C1;
+        font-size: 6rem;
+        margin: 40px 0;
+        transform: rotate(10deg);
+    }
+    p {
+        display: none;
+    }
+    .btn-primary, .btn-secondary {
+        color: white;
+        padding: 0.5rem 1rem;
+        font-size: 1.5rem;
+        border-radius: 5px;
+        text-decoration: none;
+        margin-bottom: 25%;
+        width: 300px;
+        background-color: #32C0C1;    
+    }
+    .btn-primary {
+        margin-right: 20px;
+    }
+    .btn-secondary {
+        margin-left: 20px;
+    }
+    .btn-primary:hover, .btn-secondary:hover {
+        color: #32C0C1;
+        background-color: white;
+    }
+
+</style>
+
+<body>
+
+    <div class="language-switcher">
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+    
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+    </div>
+
+    <h1>{% trans "Sorry, you lost!" %}</h1>
+
+    <p>{% trans "Your Score" %}: {{ player1_score }}</p>
+    <p>{% trans "AI Score" %}: {{ ai_score }}</p>
+
+    <div>
+        <a href="{% url 'pong2d_ia' %}" class="btn btn-primary">{% trans "Try Again" %}</a>
+        <a href="{% url 'home' %}" class="btn btn-secondary">{% trans "Return to Homepage" %}</a>
+    </div>
+
+</body>
+
+{% endblock %}
+

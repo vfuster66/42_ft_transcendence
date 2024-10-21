@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+    .container-signup {
+        font-family: var(--main-font);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-image: url('/static/images/background_1.png');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        width: 100vw;
+        padding: 50px 0;
+    }
+    .signup-h2 {
+        color: var(--secondary-color);
+        font-size: 5rem;
+        text-align: center;
+        margin-top: -50px;
+        margin-bottom: 1rem;
+    }
+    .container-signup form {
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .container-signup form p {
+        width: 100%;
+        margin: 0;
+        color: var(--secondary-color);
+    }
+    .container-signup form p label {
+        font-size: 1.2rem;
+        margin-bottom: -5px;
+        display: block;
+    }
+    .container-signup input[type='text'],
+    .container-signup input[type='email'],
+    .container-signup input[type='password'] {
+        width: 100%;
+        font-size: 1.5rem;
+        padding: 10px;
+        margin: 10px 0;
+        border: 2px solid var(--primary-color);
+        border-radius: 10px;
+        color: var(--primary-color);
+    }
+    .container-signup .signup-button {
+        font-size: 2rem;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 30px;
+        color: white;
+        background-color: var(--secondary-color);
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    .container-signup .signup-button:hover {
+        color: var(--secondary-color);
+        background-color: white;
+        transform: scale(1.05);
+    }
+    @media (max-width: 768px) {
+        .signup-h2 {
+            font-size: 3.5rem;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .container-signup form {
+            width: 90%;
+        }
+        .container-signup form p label {
+            font-size: 1.2rem;
+        }
+        .container-signup input[type='text'],
+        .container-signup input[type='email'],
+        .container-signup input[type='password'] {
+            font-size: 1.2rem;
+            padding: 8px;
+        }
+        .container-signup .signup-button {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+        }
+        .container-signup {
+            padding: 30px 10px;
+        }
+    }
+
+</style>
+
+<div class="language-switcher">
+    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {% translate "Language" %}
+    </button>
+
+    <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.path }}">
+        <button type="submit" name="language" value="en" class="dropdown-item">
+            <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+        </button>
+        <button type="submit" name="language" value="fr" class="dropdown-item">
+            <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+        </button>
+        <button type="submit" name="language" value="es" class="dropdown-item">
+            <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+        </button>
+    </form>
+</div>
+
+<div class="container-signup">
+
+    <h2 class="signup-h2">{% trans 'Sign Up' %}</h2>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <div>
+            <a href="{% url 'privacy_policy' %}">{% trans 'Privacy Policy' %}</a>
+        </div>
+
+        <button type="submit" class="signup-button">{% trans 'Sign Up' %}</button>
+    </form>
+
+</div>
+
+{% endblock %}
+
+

@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+
+    .connexion-wrapper {
+        font-family: 'Gagalin';
+        min-height: 100vh; 
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end; 
+        align-items: center; 
+        background-image: url('/static/images/connexion.png');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed; 
+        width: 100vw; 
+        padding-bottom: 10vh;
+    }
+
+    .connexion-links {
+        width: 100%; 
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+        margin-bottom: 2rem;
+    }
+
+    .connexion-link {
+        display: block; 
+        font-size: 4rem; 
+        color: #32C0C1;
+        margin-bottom: 4.5rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); 
+        text-align: left;
+        background-color: transparent;
+        text-decoration: none;
+        margin-left: 50px;
+        transition: color 0.3s;
+    }
+
+    .connexion-link:hover {
+        color: var(--primary-color);
+    }
+
+    .connexion-link:hover .number-42 {
+        color: var(--secondary-color);
+    }
+
+    .connexion {
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    .inscription {
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    .connexion-42 {
+        background-color: transparent;
+        text-decoration: none;
+    }
+
+    .number-42 {
+        color: var(--primary-color);
+        transition: color 0.3s;
+    }
+
+    .number-42:hover {
+        color: var(--secondary-color);
+    }
+    @media (max-width: 768px) {
+        .connexion-wrapper {
+            background-image: url('/static/images/connexion_mobile.png');
+            background-size: cover;
+        }
+
+        .connexion-link {
+            font-size: 2rem;
+            margin: 0;
+            text-align: center;
+        }
+    }
+
+</style>
+
+<div class="language-switcher">
+    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {% translate "Language" %}
+    </button>
+
+    <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.path }}">
+        <button type="submit" name="language" value="en" class="dropdown-item">
+            <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+        </button>
+        <button type="submit" name="language" value="fr" class="dropdown-item">
+            <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+        </button>
+        <button type="submit" name="language" value="es" class="dropdown-item">
+            <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+        </button>
+    </form>
+</div>
+
+<div class="connexion-wrapper">
+
+    <div class="connexion-links">
+
+        <a href="{% url 'login' %}" class="connexion-link connexion">{% trans "LOGIN" %}</a>
+        <a href="{% url 'signup' %}" class="connexion-link inscription">{% trans "SIGN UP" %}</a>
+        <a href="{% url 'start_oauth' %}" class="connexion-link connexion-42">{% trans "LOGIN" %} <span class="number-42">42</span></a>
+
+    </div>
+
+</div>
+
+
+{% endblock %}
+

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        align-items: center;
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('{% static "images/vainqueur_1.png" %}');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        height: 100vh;
+        margin: 0;
+    }
+    h1 {
+        color: #001aa0;
+        font-size: 6rem;
+        margin: 0;
+        transform: rotate(-10deg);
+    }
+    p {
+        display: none;
+    }
+    .btn-primary, .btn-secondary {
+        color: white;
+        padding: 0.5rem 1rem;
+        font-size: 1.5rem;
+        border-radius: 5px;
+        text-decoration: none;
+        width: 300px;
+        background-color: #001aa0;
+    }
+    .btn-primary {
+        margin-right: 20px;
+    }
+    .btn-secondary {
+        margin-left: 20px;
+    }
+    .btn-primary:hover, .btn-secondary:hover {
+        color: #001aa0;
+        background-color: white;
+    }
+
+</style>
+
+<body>
+
+    <div class="language-switcher">
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+    
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+    </div>
+
+    <div>
+        <a href="{% url 'pongapi2d_ia' %}" class="btn btn-primary">{% trans "Play Again" %}</a>
+        <a href="{% url 'home' %}" class="btn btn-secondary">{% trans "Return to Homepage" %}</a>
+    </div>
+
+</body>
+
+{% endblock %}
+

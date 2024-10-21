@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+
+    body {
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('/static/images/background_1.png');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        color: #32C0C1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        flex-direction: column;
+    }
+    h1 {
+        color: #32C0C1;
+        font-size: 5rem;
+        margin-bottom: 50px;
+    }
+    h2, h3 {
+        color: #32C0C1;
+    }
+    .fixed-button-container {
+        margin-top: 20px;
+        text-align: center;
+    }
+    .btn-primary {
+        color: white;
+        background-color: #32C0C1;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        cursor: pointer;
+    }
+    .btn-primary:hover {
+        color: #32C0C1;
+        background-color: white;
+    }
+    ul {
+        font-size: 1.5rem;
+        margin-bottom: 50px;
+    }
+
+</style>
+
+<body>
+
+    <div class="language-switcher">
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+    </div>
+
+    <h1>{% trans 'Invaders Tournament Details' %}</h1><br>
+
+    <ul>
+        {% for game in games %}
+            <li>
+                {% with player=game.invaders_game %}
+                    {{ player.player.username }} - 
+                    {% if player.game_over %}
+                        Score: {{ player.score }}
+                    {% else %}
+                        <a href="{% url 'invaders_tournament' %}?match_id={{ game.id }}&is_tournament_mode=true&tournament_id={{ tournament.id }}">{% trans 'Play Game' %}</a>
+                    {% endif %}
+                {% endwith %}
+            </li>
+        {% endfor %}
+    </ul><br>
+
+    {% if tournament.completed %}
+        <h2>{% trans 'Winner:' %} {{ tournament.winner.username }}<h2>
+    {% endif %}
+
+    <div class="fixed-button-container">
+        <a href="{% url 'home' %}" class="btn btn-primary">
+            {% trans "Return to Homepage" %}
+        </a>
+    </div>
+
+</body>
+
+<script>
+
+    window.isTournamentMode = 'true';
+    window.tournamentId = '{{ tournament.id }}';
+    window.matchId = '{{ match.id }}';
+
+</script>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{% static 'invaders/js/script.js' %}"></script>
+
+<script>
+
+    window.isTournamentMode = "{{ is_tournament_mode|yesno:'true,false' }}";
+    window.tournamentId = "{{ tournament_id }}";
+    window.matchId = "{{ match_id }}";
+
+    console.log('isTournamentMode:', window.isTournamentMode);
+    console.log('tournamentId:', window.tournamentId);
+    console.log('matchId:', window.matchId);
+
+</script>
+
+{% endblock %}
+

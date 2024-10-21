@@ -1,0 +1,342 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+
+    body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('{% static "images/background_2.png" %}');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        color: #001aa0;
+        padding: 0;
+    }
+    #container {
+        height: 600px;
+        width: 900px;
+        position: relative;
+        background-color: #000;
+    }
+    #game-canvas {
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+    #invader-info {
+        position: absolute;
+        bottom: 230px;
+        left: 415px;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 200px;
+        height: 145px;
+        font-family: 'Bungee Inline', cursive;
+        font-size: 20px;
+        color: #fff;
+    }
+    #invader-info p {
+        margin: 0;
+        border: 0;
+        padding: 0;
+    }
+    #splash-instruction {
+        position: absolute;
+        bottom: 170px;
+        left: 215px;
+        width: 500px;
+        height: 40px;
+        text-align: center;
+        font-family: 'Bungee Inline', cursive;
+        font-size: 23px;
+        color: #fff;
+        letter-spacing: 2px;
+    }
+    .header {
+        color: #ee300c;
+    }
+    .button:hover {
+        cursor: pointer;
+    }
+    #port-link {
+        color: #ffff6d;
+        text-decoration: none;
+        transition: color .15s ease-in;
+    }
+    #port-link:hover {
+        color: #fff;
+        transition: color .15s ease-in;
+    }
+    #close-about {
+        margin-left: 200px;
+        margin-top: 5px;
+        color: #fff;
+    }
+    #close-about:hover {
+        cursor: pointer;
+        color: #ffff6d;
+    }
+    #instructions-button:hover {
+        cursor: pointer;
+        color: #ffff6d;
+    }
+    #instructions {
+        padding: 0 15px 0 15px;
+        position: absolute;
+        bottom: 100px;
+        left: 300px;
+        background-color: grey;
+        height: 400px;
+        width: 300px;
+        font-family: 'Bungee Inline', cursive;
+        letter-spacing: 1px;
+        line-height: 25px;
+        color: #000;
+        text-align: center;
+        border-radius: 10px;
+    }
+    #close-instructions {
+        margin-left: 200px;
+        margin-top: 5px;
+        color: #fff;
+    }
+    #close-instructions:hover {
+        cursor: pointer;
+        color: #ffff6d;
+    }
+    #close-instructions:hover {
+        cursor: pointer;
+        color: #ffff6d;
+    }
+    #main-logo {
+        position: absolute;
+        top: 10px;
+        left: 215px;
+        height: 210px;
+        width: 500px;
+    }
+    #grunt-1 {
+        position: absolute;
+        left: 355px;
+        bottom: 350px;
+        height: 30px;
+        width: 30px;
+    }
+    #soldier-1 {
+        position: absolute;
+        left: 355px;
+        bottom: 310px;
+        height: 30px;
+        width: 30px;
+    }
+    #invader-1 {
+        position: absolute;
+        left: 355px;
+        bottom: 270px;
+        height: 30px;
+        width: 30px;
+    }
+    #ufo {
+        position: absolute;
+        left: 344px;
+        bottom: 226px;
+        height: 32px;
+        width: 55px;
+    }
+    #play-game {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 5;
+        height: 50px;
+        width: 300px;
+        transition: all .2s ease-in;
+        border: 2px solid #fff;
+        border-radius: 3px;
+        font-family: 'Bungee Inline', cursive;
+        font-size: 23px;
+        color: #fff;
+        letter-spacing: 2px;
+        background-color: transparent;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    #play-game:hover {
+        cursor: pointer;
+        transition: all .2s ease-in;
+        background: rgba(255, 255, 255, 0.4);
+    }
+    #play-game p {
+        margin: 0;
+    }
+    .hide {
+        display: none !important;
+        z-index: -5;
+    }
+    .show {
+        z-index: 5;
+    }
+    #game-over {
+        position: absolute;
+        z-index: 5;
+        bottom: 150px;
+        left: 180px;
+    }
+    .player-info {
+        position: absolute;
+        left: 50px;
+        top: 20%;
+        transform: translateY(-50%);
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        z-index: 10;
+    }
+    .player-info div {
+        text-align: center;
+    }
+    .player-info img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+    }
+    .player-info p {
+        font-size: 24px;
+        color: #001aa0;
+        margin-top: 10px;
+    }
+    .btn-primary {
+        color: #fff;
+        background-color: #001aa0;
+        padding: 0.375rem 0.75rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        margin-top: 10px;
+    }
+    .btn-primary:hover {
+        color: #001aa0;
+        background-color: white;
+        padding: 0.375rem 0.75rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        cursor: pointer;
+    }
+
+</style>
+
+<head>
+
+    <meta name="csrf-token" content="{{ csrf_token }}">
+
+</head>
+
+<body>
+
+    <div class="language-switcher">
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+    </div>
+
+    <div class="player-info">
+
+        <div id="player1-info">
+            <img id="player1-avatar" src="{{ user_profile.avatar_url }}" alt="{{ user_profile.user }}">
+            <p id="player1-name">{{ user_profile.user }}</p>
+        </div>
+
+    </div>
+
+    <div id="container">
+
+        <canvas id="game-canvas"></canvas>
+
+        <div id="invader-info" class="show">
+            <p>= 10 {% trans 'points' %}</p>
+            <p>= 20 {% trans 'points' %}</p>
+            <p>= 40 {% trans 'points' %}</p>
+            <p>= ??? {% trans 'points' %}</p>
+        </div>
+
+        <div id='splash-instruction' class='show'>
+            <p>{% trans 'Press space to shoot, and use the arrow keys to move.' %}</p>
+        </div>
+
+        <div id='play-game'>
+            <p>{% trans 'CLICK TO START' %}</p>
+        </div>
+
+        <!-- Sprite images -->
+        <img class='hide' id='game-over' src="{% static 'invaders/images/game-over.jpg' %}" alt="Game Over">
+        <img id="main-logo" src="{% static 'invaders/images/main-logo.jpg' %}" alt="Main Logo">
+        <img class="hide" id="defender" src="{% static 'invaders/images/defender.jpg' %}" alt="Defender">
+        <img class='hide' id='defender-death' src="{% static 'invaders/images/defender-death.jpg' %}" alt="Defender Death">
+        <img id="grunt-1" src="{% static 'invaders/images/grunt-1.jpg' %}" alt="Grunt 1">
+        <img class="hide" id="grunt-2" src="{% static 'invaders/images/grunt-2.jpg' %}" alt="Grunt 2">
+        <img id="soldier-1" src="{% static 'invaders/images/soldier-1.jpg' %}" alt="Soldier 1">
+        <img class="hide" id="soldier-2" src="{% static 'invaders/images/soldier-2.jpg' %}" alt="Soldier 2">
+        <img id="invader-1" src="{% static 'invaders/images/invader-1.jpg' %}" alt="Invader 1">
+        <img class="hide" id="invader-2" src="{% static 'invaders/images/invader-2.jpg' %}" alt="Invader 2">
+        <img id="ufo" src="{% static 'invaders/images/ufo.jpg' %}" alt="UFO">
+        <img class="hide" id="lives" src="{% static 'invaders/images/lives.jpg' %}" alt="Lives">
+        <img class="hide" id="ship-death" src="{% static 'invaders/images/ship-death.jpg' %}" alt="Ship Death">
+
+    </div>
+
+    <div class="fixed-button-container">
+        <a href="{% url 'home' %}" class="btn btn-primary">
+            {% trans "Return to Homepage" %}
+        </a>
+    </div>
+
+</body>
+
+{% endblock %}
+
+{% block extra_js %}
+
+<script src="{% static 'invaders/js/script.js' %}"></script>
+
+<script>
+
+    window.isTournamentMode = "false";
+    window.matchId = "{{ match_id }}";
+    console.log('isTournamentMode:', window.isTournamentMode);
+    console.log('matchId:', window.matchId);
+
+</script>
+    
+{% endblock %}
+

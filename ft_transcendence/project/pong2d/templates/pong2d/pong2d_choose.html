@@ -1,0 +1,132 @@
+
+<!-- pong/templates/pong/pong2d_choose.html -->
+
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+
+    body {
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('{% static "images/background_2.png" %}');
+        background-size: cover;
+        color: #001aa0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    .container {
+        text-align: center;
+    }
+    h1 {
+        font-size: 4rem;
+        margin-bottom: 20px;
+    }
+    h2 {
+        font-size: 3.5rem;
+    }
+    .player-selection {
+        font-size: 1.5rem;
+        margin: 20px auto;
+        text-align: left;
+        width: 300px;
+        margin-top: 50px;
+    }
+    .form-control {
+        display: block;
+        width: 100%;
+        padding: 0.375rem 0.75rem;
+        font-size: 1.5rem;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: 0.25rem;
+        transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    }
+    .btn-primary {
+        color: #fff;
+        background-color: #001aa0;
+        padding: 0.375rem 0.75rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        margin-top: 50px;
+    }
+    .btn-primary:hover {
+        color: #001aa0;
+        background-color: white;
+        padding: 0.375rem 0.75rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        cursor: pointer;
+    }
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 3rem;
+        }
+        h2 {
+            font-size: 2rem;
+        }
+    }
+
+</style>
+
+<body>
+
+    <div class="language-switcher">
+
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+
+    </div>
+
+    <div class="container">
+
+        <h1>{% trans 'PandaPong 2D' %}</h1>
+        <h2>{% trans 'Player selection' %}</h2>
+    
+        <form method="POST" action="{% url 'pong2d_choose' %}">
+            {% csrf_token %}
+            <div class="player-selection">
+                <label for="player2_id">{% trans "Select Player 2" %}:</label>
+                <select name="player2_id" id="player2_id" class="form-control" required>
+                    <option value="" disabled selected>{% trans "Choose a player" %}</option>
+                    {% for user in online_users %}
+                        <option value="{{ user.user.id }}">{{ user.user.username }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">{% trans "Start Game" %}</button>
+        </form>
+
+    </div>
+
+</body>
+
+{% endblock %}

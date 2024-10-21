@@ -1,0 +1,111 @@
+
+<!-- invaders/templates/invaders/select_mode.html -->
+
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+
+    body {
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('{% static "images/background_1.png" %}');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        color: #32C0C1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        flex-direction: column;
+    }
+    h1 {
+        font-size: 4rem;
+        margin-bottom: 20px;
+        text-align: center;
+    }
+    h2 {
+        font-size: 3.5rem;
+        margin-bottom: 50px;
+        text-align: center;
+    }
+    a {
+        text-decoration: none;
+        color: white;
+        font-size: 2rem;
+    }
+    a:hover {
+        color: #32C0C1;
+    }
+    .btn-primary {
+        color: white;
+        background-color: #32C0C1;
+        padding: 0.375rem 0.75rem;
+        font-size: 1.25rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        margin-top: 50px;
+    }
+    .btn-primary:hover {
+        color: #32C0C1;
+        background-color: white;
+    }
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 3rem;
+        }
+        h2 {
+            font-size: 2rem;
+        }
+    }
+
+</style>
+
+<body>
+
+    <div class="language-switcher">
+
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+
+    </div>
+
+    <h1>{% trans 'Invaders' %}</h1>
+
+    <h2>{% trans 'Choose Game Mode' %}</h2>
+
+    <a href="{% url 'invaders_solo' %}">{% trans 'Solo Mode' %}</a><br>
+    <a href="{% url 'create_invaders_tournament' %}">{% trans 'Tournament' %}</a>
+
+    <div class="fixed-button-container">
+        <a href="{% url 'home' %}" class="btn btn-primary">
+            {% trans "Return to Homepage" %}
+        </a>
+    </div>
+
+</body>
+
+{% endblock %}
+

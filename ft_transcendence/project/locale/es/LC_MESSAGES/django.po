@@ -1,0 +1,1271 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-05-30 11:14+0200\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? "
+"1 : 2;\n"
+
+#: chat/forms.py:17 chat/forms.py:23
+msgid "Room name"
+msgstr "Nombre de la sala"
+
+#: chat/forms.py:18 chat/forms.py:24
+msgid "Make room private"
+msgstr "Hacer la sala privada"
+
+#: chat/templates/chat/chat.html:250 chat/templates/chat/create_room.html:92
+#: chat/templates/chat/room_list.html:121
+#: invaders/templates/invaders/create_invaders_tournament.html:90
+#: invaders/templates/invaders/invaders_lose.html:60
+#: invaders/templates/invaders/invaders_solo.html:256
+#: invaders/templates/invaders/invaders_tournament.html:256
+#: invaders/templates/invaders/invaders_tournament_details.html:61
+#: invaders/templates/invaders/select_mode.html:76
+#: pong2d/templates/pong2d/pong2d_choose.html:90
+#: pong2d/templates/pong2d/pong2d_failure.html:64
+#: pong2d/templates/pong2d/pong2d_ia.html:101
+#: pong2d/templates/pong2d/pong2d_mode.html:76
+#: pong2d/templates/pong2d/pong2d_pvp.html:88
+#: pong2d/templates/pong2d/pong2d_pvp_success.html:117
+#: pong2d/templates/pong2d/pong2d_success.html:59
+#: pongapi2d/templates/pongapi2d/pongapi2d_choose.html:90
+#: pongapi2d/templates/pongapi2d/pongapi2d_failure.html:64
+#: pongapi2d/templates/pongapi2d/pongapi2d_ia.html:101
+#: pongapi2d/templates/pongapi2d/pongapi2d_mode.html:76
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp.html:88
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp_success.html:117
+#: pongapi2d/templates/pongapi2d/pongapi2d_success.html:59
+#: templates/base.html:105
+#: tournaments/templates/tournaments/create_api_tournament.html:88
+#: tournaments/templates/tournaments/create_tournament.html:88
+#: tournaments/templates/tournaments/tournament_api_details.html:52
+#: tournaments/templates/tournaments/tournament_details.html:53
+#: tournaments/templates/tournaments/tournament_pong2d_pvp.html:88
+#: tournaments/templates/tournaments/tournament_pongapi2d_pvp.html:88
+#: tournaments/templates/tournaments/update_api_game.html:13
+#: tournaments/templates/tournaments/update_game.html:13
+#: users/templates/users/anonymize_account.html:11
+#: users/templates/users/change_password.html:96
+#: users/templates/users/change_password_done.html:77
+#: users/templates/users/connexion.html:95
+#: users/templates/users/deactivate_account.html:11
+#: users/templates/users/delete_account.html:11
+#: users/templates/users/friends.html:151
+#: users/templates/users/game_history.html:49
+#: users/templates/users/home.html:173 users/templates/users/login.html:114
+#: users/templates/users/logout.html:63
+#: users/templates/users/manage_data.html:11
+#: users/templates/users/privacy_policy.html:11
+#: users/templates/users/profil.html:214
+#: users/templates/users/setup_totp.html:79
+#: users/templates/users/signup.html:106
+#: users/templates/users/statistics.html:88
+msgid "Language"
+msgstr "Idioma"
+
+#: chat/templates/chat/chat.html:256 chat/templates/chat/create_room.html:98
+#: chat/templates/chat/room_list.html:127
+#: invaders/templates/invaders/create_invaders_tournament.html:96
+#: invaders/templates/invaders/invaders_lose.html:66
+#: invaders/templates/invaders/invaders_solo.html:262
+#: invaders/templates/invaders/invaders_tournament.html:262
+#: invaders/templates/invaders/invaders_tournament_details.html:67
+#: invaders/templates/invaders/select_mode.html:83
+#: pong2d/templates/pong2d/pong2d_choose.html:97
+#: pong2d/templates/pong2d/pong2d_failure.html:71
+#: pong2d/templates/pong2d/pong2d_ia.html:107
+#: pong2d/templates/pong2d/pong2d_mode.html:83
+#: pong2d/templates/pong2d/pong2d_pvp.html:95
+#: pong2d/templates/pong2d/pong2d_pvp_success.html:124
+#: pong2d/templates/pong2d/pong2d_success.html:66
+#: pongapi2d/templates/pongapi2d/pongapi2d_choose.html:97
+#: pongapi2d/templates/pongapi2d/pongapi2d_failure.html:71
+#: pongapi2d/templates/pongapi2d/pongapi2d_ia.html:107
+#: pongapi2d/templates/pongapi2d/pongapi2d_mode.html:83
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp.html:95
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp_success.html:124
+#: pongapi2d/templates/pongapi2d/pongapi2d_success.html:66
+#: templates/base.html:112
+#: tournaments/templates/tournaments/create_api_tournament.html:95
+#: tournaments/templates/tournaments/create_tournament.html:95
+#: tournaments/templates/tournaments/tournament_api_details.html:59
+#: tournaments/templates/tournaments/tournament_details.html:60
+#: tournaments/templates/tournaments/tournament_pong2d_pvp.html:95
+#: tournaments/templates/tournaments/tournament_pongapi2d_pvp.html:95
+#: tournaments/templates/tournaments/update_api_game.html:20
+#: tournaments/templates/tournaments/update_game.html:20
+#: users/templates/users/anonymize_account.html:18
+#: users/templates/users/change_password.html:103
+#: users/templates/users/change_password_done.html:84
+#: users/templates/users/connexion.html:102
+#: users/templates/users/deactivate_account.html:18
+#: users/templates/users/delete_account.html:18
+#: users/templates/users/friends.html:158
+#: users/templates/users/game_history.html:56
+#: users/templates/users/home.html:180 users/templates/users/login.html:121
+#: users/templates/users/logout.html:70
+#: users/templates/users/manage_data.html:18
+#: users/templates/users/privacy_policy.html:18
+#: users/templates/users/profil.html:221
+#: users/templates/users/setup_totp.html:86
+#: users/templates/users/signup.html:113
+#: users/templates/users/statistics.html:95
+msgid "English"
+msgstr "Inglés"
+
+#: chat/templates/chat/chat.html:259 chat/templates/chat/create_room.html:101
+#: chat/templates/chat/room_list.html:130
+#: invaders/templates/invaders/create_invaders_tournament.html:99
+#: invaders/templates/invaders/invaders_lose.html:69
+#: invaders/templates/invaders/invaders_solo.html:265
+#: invaders/templates/invaders/invaders_tournament.html:265
+#: invaders/templates/invaders/invaders_tournament_details.html:70
+#: invaders/templates/invaders/select_mode.html:86
+#: pong2d/templates/pong2d/pong2d_choose.html:100
+#: pong2d/templates/pong2d/pong2d_failure.html:74
+#: pong2d/templates/pong2d/pong2d_ia.html:110
+#: pong2d/templates/pong2d/pong2d_mode.html:86
+#: pong2d/templates/pong2d/pong2d_pvp.html:98
+#: pong2d/templates/pong2d/pong2d_pvp_success.html:127
+#: pong2d/templates/pong2d/pong2d_success.html:69
+#: pongapi2d/templates/pongapi2d/pongapi2d_choose.html:100
+#: pongapi2d/templates/pongapi2d/pongapi2d_failure.html:74
+#: pongapi2d/templates/pongapi2d/pongapi2d_ia.html:110
+#: pongapi2d/templates/pongapi2d/pongapi2d_mode.html:86
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp.html:98
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp_success.html:127
+#: pongapi2d/templates/pongapi2d/pongapi2d_success.html:69
+#: templates/base.html:115
+#: tournaments/templates/tournaments/create_api_tournament.html:98
+#: tournaments/templates/tournaments/create_tournament.html:98
+#: tournaments/templates/tournaments/tournament_api_details.html:62
+#: tournaments/templates/tournaments/tournament_details.html:63
+#: tournaments/templates/tournaments/tournament_pong2d_pvp.html:98
+#: tournaments/templates/tournaments/tournament_pongapi2d_pvp.html:98
+#: tournaments/templates/tournaments/update_api_game.html:23
+#: tournaments/templates/tournaments/update_game.html:23
+#: users/templates/users/anonymize_account.html:21
+#: users/templates/users/change_password.html:106
+#: users/templates/users/change_password_done.html:87
+#: users/templates/users/connexion.html:105
+#: users/templates/users/deactivate_account.html:21
+#: users/templates/users/delete_account.html:21
+#: users/templates/users/friends.html:161
+#: users/templates/users/game_history.html:59
+#: users/templates/users/home.html:183 users/templates/users/login.html:124
+#: users/templates/users/logout.html:73
+#: users/templates/users/manage_data.html:21
+#: users/templates/users/privacy_policy.html:21
+#: users/templates/users/profil.html:224
+#: users/templates/users/setup_totp.html:89
+#: users/templates/users/signup.html:116
+#: users/templates/users/statistics.html:98
+msgid "Français"
+msgstr "Francés"
+
+#: chat/templates/chat/chat.html:262 chat/templates/chat/create_room.html:104
+#: chat/templates/chat/room_list.html:133
+#: invaders/templates/invaders/create_invaders_tournament.html:102
+#: invaders/templates/invaders/invaders_lose.html:72
+#: invaders/templates/invaders/invaders_solo.html:268
+#: invaders/templates/invaders/invaders_tournament.html:268
+#: invaders/templates/invaders/invaders_tournament_details.html:73
+#: invaders/templates/invaders/select_mode.html:89
+#: pong2d/templates/pong2d/pong2d_choose.html:103
+#: pong2d/templates/pong2d/pong2d_failure.html:77
+#: pong2d/templates/pong2d/pong2d_ia.html:113
+#: pong2d/templates/pong2d/pong2d_mode.html:89
+#: pong2d/templates/pong2d/pong2d_pvp.html:101
+#: pong2d/templates/pong2d/pong2d_pvp_success.html:130
+#: pong2d/templates/pong2d/pong2d_success.html:72
+#: pongapi2d/templates/pongapi2d/pongapi2d_choose.html:103
+#: pongapi2d/templates/pongapi2d/pongapi2d_failure.html:77
+#: pongapi2d/templates/pongapi2d/pongapi2d_ia.html:113
+#: pongapi2d/templates/pongapi2d/pongapi2d_mode.html:89
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp.html:101
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp_success.html:130
+#: pongapi2d/templates/pongapi2d/pongapi2d_success.html:72
+#: templates/base.html:118
+#: tournaments/templates/tournaments/create_api_tournament.html:101
+#: tournaments/templates/tournaments/create_tournament.html:101
+#: tournaments/templates/tournaments/tournament_api_details.html:65
+#: tournaments/templates/tournaments/tournament_details.html:66
+#: tournaments/templates/tournaments/tournament_pong2d_pvp.html:101
+#: tournaments/templates/tournaments/tournament_pongapi2d_pvp.html:101
+#: tournaments/templates/tournaments/update_api_game.html:26
+#: tournaments/templates/tournaments/update_game.html:26
+#: users/templates/users/anonymize_account.html:24
+#: users/templates/users/change_password.html:109
+#: users/templates/users/change_password_done.html:90
+#: users/templates/users/connexion.html:108
+#: users/templates/users/deactivate_account.html:24
+#: users/templates/users/delete_account.html:24
+#: users/templates/users/friends.html:164
+#: users/templates/users/game_history.html:62
+#: users/templates/users/home.html:186 users/templates/users/login.html:127
+#: users/templates/users/logout.html:76
+#: users/templates/users/manage_data.html:24
+#: users/templates/users/privacy_policy.html:24
+#: users/templates/users/profil.html:227
+#: users/templates/users/setup_totp.html:92
+#: users/templates/users/signup.html:119
+#: users/templates/users/statistics.html:101
+msgid "Castellano"
+msgstr "Castellano"
+
+#: chat/templates/chat/chat.html:267
+msgid "ChatRoom :"
+msgstr "Sala de chat :"
+
+#: chat/templates/chat/chat.html:272
+msgid "Invite to the room"
+msgstr "Invitar a la sala"
+
+#: chat/templates/chat/chat.html:276 chat/templates/chat/chat.html:349
+#, fuzzy
+#| msgid "Username"
+msgid " Username"
+msgstr "Nombre de usuario"
+
+#: chat/templates/chat/chat.html:278
+msgid "Add"
+msgstr "Añadir"
+
+#: chat/templates/chat/chat.html:279 users/templates/users/friends.html:193
+msgid "Remove"
+msgstr "Eliminar"
+
+#: chat/templates/chat/chat.html:328
+msgid "Type a message..."
+msgstr "Escriba un mensaje..."
+
+#: chat/templates/chat/chat.html:333
+msgid "Send"
+msgstr "Enviar"
+
+#: chat/templates/chat/chat.html:345
+msgid "Block User"
+msgstr "Bloquear usuario"
+
+#: chat/templates/chat/chat.html:351
+msgid "Block"
+msgstr "Bloquear"
+
+#: chat/templates/chat/chat.html:352
+msgid "Unblock"
+msgstr "Desbloquear"
+
+#: chat/templates/chat/chat.html:400
+#, fuzzy
+#| msgid "Invite to play Pong"
+msgid "Invite to play"
+msgstr "Invitar a jugar Pong"
+
+#: chat/templates/chat/chat.html:403
+msgid "Username"
+msgstr "Nombre de usuario"
+
+#: chat/templates/chat/chat.html:405
+#: pong2d/templates/pong2d/pong2d_choose.html:111
+#: pong2d/templates/pong2d/pong2d_mode.html:95
+msgid "PandaPong 2D"
+msgstr "PandaPong 2D"
+
+#: chat/templates/chat/chat.html:406
+msgid "PandaPong 3D"
+msgstr "Pandapong 3D"
+
+#: chat/templates/chat/chat.html:407
+msgid "PandaPong API 2D"
+msgstr "PandaPong API 2D"
+
+#: chat/templates/chat/chat.html:408
+#: invaders/templates/invaders/select_mode.html:95
+msgid "Invaders"
+msgstr "Invaders"
+
+#: chat/templates/chat/chat.html:411
+msgid "Invite"
+msgstr "Invitar"
+
+#: chat/templates/chat/chat.html:454
+msgid "Return to Room List"
+msgstr "Volver a la lista"
+
+#: chat/templates/chat/create_room.html:109
+msgid "Create new Room"
+msgstr "Crear una nueva sala"
+
+#: chat/templates/chat/create_room.html:110
+msgid "Please fill out the information below to create a new room."
+msgstr ""
+"Por favor, complete la información a continuación para crear una nueva sala."
+
+#: chat/templates/chat/create_room.html:123
+#: chat/templates/chat/room_list.html:162
+msgid "Create"
+msgstr "Crear"
+
+#: chat/templates/chat/create_room.html:129
+#, fuzzy
+#| msgid "Return to Room List"
+msgid "Return to Rooms List"
+msgstr "Volver a la lista"
+
+#: chat/templates/chat/room_list.html:138
+msgid "Chat"
+msgstr "Chat"
+
+#: chat/templates/chat/room_list.html:143
+msgid "Chat Rooms List"
+msgstr "Lista de salas de chat"
+
+#: chat/templates/chat/room_list.html:148
+msgid "Private"
+msgstr "Privado"
+
+#: chat/templates/chat/room_list.html:151
+msgid "No rooms available."
+msgstr "No hay salas disponibles."
+
+#: chat/templates/chat/room_list.html:158
+msgid "Create a new room"
+msgstr "Crear una nueva sala"
+
+#: chat/templates/chat/room_list.html:169
+#: invaders/templates/invaders/create_invaders_tournament.html:132
+#: invaders/templates/invaders/invaders_lose.html:81
+#: invaders/templates/invaders/invaders_solo.html:320
+#: invaders/templates/invaders/invaders_tournament.html:320
+#: invaders/templates/invaders/invaders_tournament_details.html:101
+#: invaders/templates/invaders/select_mode.html:104
+#: pong2d/templates/pong2d/pong2d_failure.html:89
+#: pong2d/templates/pong2d/pong2d_ia.html:134
+#: pong2d/templates/pong2d/pong2d_mode.html:105
+#: pong2d/templates/pong2d/pong2d_pvp.html:123
+#: pong2d/templates/pong2d/pong2d_pvp_success.html:144
+#: pong2d/templates/pong2d/pong2d_success.html:79
+#: pongapi2d/templates/pongapi2d/pongapi2d_failure.html:89
+#: pongapi2d/templates/pongapi2d/pongapi2d_ia.html:133
+#: pongapi2d/templates/pongapi2d/pongapi2d_mode.html:105
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp.html:123
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp_success.html:144
+#: pongapi2d/templates/pongapi2d/pongapi2d_success.html:79
+#: tournaments/templates/tournaments/create_api_tournament.html:125
+#: tournaments/templates/tournaments/create_tournament.html:125
+#: tournaments/templates/tournaments/tournament_api_details.html:124
+#: tournaments/templates/tournaments/tournament_details.html:125
+#: tournaments/templates/tournaments/tournament_pong2d_pvp.html:123
+#: tournaments/templates/tournaments/tournament_pongapi2d_pvp.html:123
+#: users/templates/users/friends.html:232
+#: users/templates/users/game_history.html:167
+#: users/templates/users/profil.html:388
+#: users/templates/users/statistics.html:157
+msgid "Return to Homepage"
+msgstr "Volver a la página principal"
+
+#: invaders/templates/invaders/create_invaders_tournament.html:107
+#: invaders/templates/invaders/create_invaders_tournament.html:123
+#: tournaments/templates/tournaments/create_api_tournament.html:106
+#: tournaments/templates/tournaments/create_api_tournament.html:118
+#: tournaments/templates/tournaments/create_tournament.html:106
+#: tournaments/templates/tournaments/create_tournament.html:118
+msgid "Create Tournament"
+msgstr "Crear Torneo"
+
+#: invaders/templates/invaders/create_invaders_tournament.html:113
+#: tournaments/templates/tournaments/create_api_tournament.html:110
+#: tournaments/templates/tournaments/create_tournament.html:110
+msgid "Select participants:"
+msgstr "Seleccionar participantes:"
+
+#: invaders/templates/invaders/create_invaders_tournament.html:124
+#: tournaments/templates/tournaments/create_api_tournament.html:119
+#: tournaments/templates/tournaments/create_tournament.html:119
+msgid "Matchmaking"
+msgstr "Matchmaking"
+
+#: invaders/templates/invaders/invaders_lose.html:77
+#: pong2d/templates/pong2d/pong2d_pvp_success.html:135
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp_success.html:135
+msgid "Game Over !"
+msgstr "¡Juego Terminado!"
+
+#: invaders/templates/invaders/invaders_lose.html:80
+#: pong2d/templates/pong2d/pong2d_pvp_success.html:143
+#: pong2d/templates/pong2d/pong2d_success.html:78
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp_success.html:143
+#: pongapi2d/templates/pongapi2d/pongapi2d_success.html:78
+msgid "Play Again"
+msgstr "Jugar de nuevo"
+
+#: invaders/templates/invaders/invaders_solo.html:287
+#: invaders/templates/invaders/invaders_solo.html:288
+#: invaders/templates/invaders/invaders_solo.html:289
+#: invaders/templates/invaders/invaders_solo.html:290
+#: invaders/templates/invaders/invaders_tournament.html:287
+#: invaders/templates/invaders/invaders_tournament.html:288
+#: invaders/templates/invaders/invaders_tournament.html:289
+#: invaders/templates/invaders/invaders_tournament.html:290
+msgid "points"
+msgstr "puntos"
+
+#: invaders/templates/invaders/invaders_solo.html:294
+#: invaders/templates/invaders/invaders_tournament.html:294
+msgid "Press space to shoot, and use the arrow keys to move."
+msgstr "Presiona espacio para disparar, y usa las teclas de flecha para moverte."
+
+#: invaders/templates/invaders/invaders_solo.html:298
+#: invaders/templates/invaders/invaders_tournament.html:298
+msgid "CLICK TO START"
+msgstr "HAZ CLIC PARA EMPEZAR"
+
+#: invaders/templates/invaders/invaders_tournament_details.html:78
+msgid "Invaders Tournament Details"
+msgstr "Detalles del Torneo de Invaders"
+
+#: invaders/templates/invaders/invaders_tournament_details.html:88
+#: tournaments/templates/tournaments/tournament_api_details.html:80
+#: tournaments/templates/tournaments/tournament_api_details.html:95
+#: tournaments/templates/tournaments/tournament_api_details.html:111
+#: tournaments/templates/tournaments/tournament_details.html:81
+#: tournaments/templates/tournaments/tournament_details.html:96
+#: tournaments/templates/tournaments/tournament_details.html:112
+#, fuzzy
+#| msgid "In Game"
+msgid "Play Game"
+msgstr "En juego"
+
+#: invaders/templates/invaders/invaders_tournament_details.html:96
+#: pong2d/templates/pong2d/pong2d_pvp_success.html:137
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp_success.html:137
+msgid "Winner:"
+msgstr "Ganador:"
+
+#: invaders/templates/invaders/select_mode.html:97
+#: pong2d/templates/pong2d/pong2d_mode.html:97
+#: pongapi2d/templates/pongapi2d/pongapi2d_mode.html:97
+msgid "Choose Game Mode"
+msgstr "Elige el Modo de Juego"
+
+#: invaders/templates/invaders/select_mode.html:99
+msgid "Solo Mode"
+msgstr "Modo Solo"
+
+#: invaders/templates/invaders/select_mode.html:100
+#: pong2d/templates/pong2d/pong2d_mode.html:101
+#: pongapi2d/templates/pongapi2d/pongapi2d_mode.html:101
+msgid "Tournament"
+msgstr "Torneo"
+
+#: pong2d/templates/pong2d/pong2d_choose.html:112
+#: pongapi2d/templates/pongapi2d/pongapi2d_choose.html:112
+msgid "Player selection"
+msgstr "Selección de Jugador"
+
+#: pong2d/templates/pong2d/pong2d_choose.html:117
+#: pongapi2d/templates/pongapi2d/pongapi2d_choose.html:117
+msgid "Select Player 2"
+msgstr "Seleccionar Jugador 2"
+
+#: pong2d/templates/pong2d/pong2d_choose.html:119
+#: pongapi2d/templates/pongapi2d/pongapi2d_choose.html:119
+#, fuzzy
+#| msgid "Choose File"
+msgid "Choose a player"
+msgstr "Seleccionar"
+
+#: pong2d/templates/pong2d/pong2d_choose.html:125
+#: pongapi2d/templates/pongapi2d/pongapi2d_choose.html:125
+#, fuzzy
+#| msgid "Start !"
+msgid "Start Game"
+msgstr "¡Empezar!"
+
+#: pong2d/templates/pong2d/pong2d_failure.html:82
+#: pongapi2d/templates/pongapi2d/pongapi2d_failure.html:82
+msgid "Sorry, you lost!"
+msgstr "Lo siento, ¡has perdido!"
+
+#: pong2d/templates/pong2d/pong2d_failure.html:84
+#: pongapi2d/templates/pongapi2d/pongapi2d_failure.html:84
+msgid "Your Score"
+msgstr "Tu Puntuación"
+
+#: pong2d/templates/pong2d/pong2d_failure.html:85
+#: pongapi2d/templates/pongapi2d/pongapi2d_failure.html:85
+msgid "AI Score"
+msgstr "Puntuación de la IA"
+
+#: pong2d/templates/pong2d/pong2d_failure.html:88
+#: pongapi2d/templates/pongapi2d/pongapi2d_failure.html:88
+msgid "Try Again"
+msgstr "Intenta de Nuevo"
+
+#: pong2d/templates/pong2d/pong2d_ia.html:119
+#: pongapi2d/templates/pongapi2d/pongapi2d_ia.html:119
+msgid "PandaPong 2D - Player vs AI"
+msgstr "PandaPong 2D - Jugador vs IA"
+
+#: pong2d/templates/pong2d/pong2d_mode.html:99
+#: pongapi2d/templates/pongapi2d/pongapi2d_mode.html:99
+#: users/templates/users/game_history.html:74
+#: users/templates/users/game_history.html:109
+msgid "Player vs Player"
+msgstr "Jugador vs Jugador"
+
+#: pong2d/templates/pong2d/pong2d_mode.html:100
+#: pongapi2d/templates/pongapi2d/pongapi2d_mode.html:100
+#: users/templates/users/game_history.html:84
+#: users/templates/users/game_history.html:119
+msgid "Player vs AI"
+msgstr "Jugador vs IA"
+
+#: pong2d/templates/pong2d/pong2d_pvp.html:106
+msgid "PandaPong 2D - Player vs Player"
+msgstr "PandaPong 2D - Jugador vs Jugador"
+
+#: pong2d/templates/pong2d/pong2d_pvp_success.html:138
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp_success.html:138
+msgid "Player 1 Score:"
+msgstr "Puntuación del Jugador 1:"
+
+#: pong2d/templates/pong2d/pong2d_pvp_success.html:139
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp_success.html:139
+msgid "Player 2 Score:"
+msgstr "Puntuación del Jugador 2:"
+
+#: pongapi2d/templates/pongapi2d/pongapi2d_choose.html:111
+#: pongapi2d/templates/pongapi2d/pongapi2d_mode.html:95
+msgid "PandaPong Api 2D"
+msgstr "PandaPong Api 2D"
+
+#: pongapi2d/templates/pongapi2d/pongapi2d_pvp.html:106
+msgid "PandaPong Api 2D - Player vs Player"
+msgstr "PandaPong Api 2D - Jugador vs Jugador"
+
+#: templates/base.html:124
+msgid "Start !"
+msgstr "¡Empezar!"
+
+#: tournaments/templates/tournaments/tournament_api_details.html:70
+#: tournaments/templates/tournaments/tournament_details.html:71
+msgid "Tournament Details"
+msgstr "Detalles del Torneo"
+
+#: tournaments/templates/tournaments/tournament_api_details.html:72
+#: tournaments/templates/tournaments/tournament_details.html:73
+#, fuzzy
+#| msgid "First name"
+msgid "First Round"
+msgstr "Nombre"
+
+#: tournaments/templates/tournaments/tournament_api_details.html:87
+#: tournaments/templates/tournaments/tournament_details.html:88
+msgid "Semi-Finals"
+msgstr "Semifinales"
+
+#: tournaments/templates/tournaments/tournament_api_details.html:103
+#: tournaments/templates/tournaments/tournament_details.html:104
+msgid "Final"
+msgstr "Final"
+
+#: tournaments/templates/tournaments/tournament_api_details.html:119
+#: tournaments/templates/tournaments/tournament_details.html:120
+msgid "Winner: "
+msgstr "Ganador: "
+
+#: tournaments/templates/tournaments/tournament_pong2d_pvp.html:106
+msgid "PandaPong 2D Tournament"
+msgstr "Torneo PandaPong 2D"
+
+#: users/forms.py:29
+msgid "I accept the terms and conditions and the privacy policy."
+msgstr "Acepto los términos y condiciones y la política de privacidad."
+
+#: users/forms.py:44 users/forms.py:58
+msgid "Required. Please enter a valid email address."
+msgstr ""
+"Requerido. Por favor, introduzca una dirección de correo electrónico válida."
+
+#: users/forms.py:53 users/models.py:56
+msgid "First name"
+msgstr "Nombre"
+
+#: users/forms.py:54 users/models.py:57
+msgid "Last name"
+msgstr "Apellido"
+
+#: users/forms.py:55 users/models.py:58 users/templates/users/profil.html:287
+msgid "Location"
+msgstr "Ubicación"
+
+#: users/forms.py:56 users/templates/users/profil.html:250
+msgid "Status"
+msgstr "Estado"
+
+#: users/forms.py:57
+msgid "Biography"
+msgstr "Biografía"
+
+#: users/forms.py:80
+msgid "The bio cannot contain more than 500 characters."
+msgstr "La biografía no puede contener más de 500 caracteres."
+
+#: users/models.py:46
+msgid "status"
+msgstr "estado"
+
+#: users/models.py:49
+msgid "Online"
+msgstr "En línea"
+
+#: users/models.py:50
+msgid "Offline"
+msgstr "Desconectado"
+
+#: users/models.py:51
+msgid "In Game"
+msgstr "En juego"
+
+#: users/templates/users/anonymize_account.html:31
+msgid "Anonymization Confirmation"
+msgstr "Confirmación de anonimización"
+
+#: users/templates/users/anonymize_account.html:33
+#: users/templates/users/profil.html:368
+msgid ""
+"Are you sure you want to anonymize your account? This action will replace "
+"your personal data with generic values and is irreversible."
+msgstr ""
+"¿Está seguro de que desea anonimizar su cuenta? Esta acción reemplazará sus "
+"datos personales con valores genéricos y es irreversible."
+
+#: users/templates/users/anonymize_account.html:37
+msgid "Anonymize My Data"
+msgstr "Anonimizar mis datos"
+
+#: users/templates/users/anonymize_account.html:38
+#: users/templates/users/deactivate_account.html:38
+#: users/templates/users/delete_account.html:38
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: users/templates/users/change_password.html:114
+msgid "Change Your Password"
+msgstr "Cambiar su contraseña"
+
+#: users/templates/users/change_password.html:120
+#: users/templates/users/manage_data.html:48
+#: users/templates/users/profil.html:348
+msgid "Change Password"
+msgstr "Cambiar contraseña"
+
+#: users/templates/users/change_password.html:127
+msgid "Back to Profile"
+msgstr "Volver al perfil"
+
+#: users/templates/users/change_password_done.html:97
+msgid "Password Successfully Changed"
+msgstr "Contraseña cambiada con éxito"
+
+#: users/templates/users/change_password_done.html:99
+msgid "Your password has been successfully changed."
+msgstr "Su contraseña ha sido cambiada con éxito."
+
+#: users/templates/users/change_password_done.html:104
+#: users/templates/users/setup_totp.html:118
+msgid "Return to Profile"
+msgstr "Volver al perfil"
+
+#: users/templates/users/connexion.html:117
+#: users/templates/users/connexion.html:119
+msgid "LOGIN"
+msgstr "INICIAR SESIÓN"
+
+#: users/templates/users/connexion.html:118
+msgid "SIGN UP"
+msgstr "REGISTRARSE"
+
+#: users/templates/users/deactivate_account.html:31
+msgid "Confirm Account Deactivation"
+msgstr "Confirmar desactivación de cuenta"
+
+#: users/templates/users/deactivate_account.html:33
+msgid ""
+"Are you sure you want to deactivate your account? You will be able to "
+"reactivate it via an administrator."
+msgstr ""
+"¿Está seguro de que desea desactivar su cuenta? Podrá reactivarla a través "
+"de un administrador."
+
+#: users/templates/users/deactivate_account.html:37
+#: users/templates/users/profil.html:374
+msgid "Deactivate Account"
+msgstr "Desactivar cuenta"
+
+#: users/templates/users/delete_account.html:31
+msgid "Confirm Account Deletion"
+msgstr "Confirmar eliminación de cuenta"
+
+#: users/templates/users/delete_account.html:33
+#: users/templates/users/profil.html:380
+msgid ""
+"Are you sure you want to delete your account? This action is irreversible."
+msgstr ""
+"¿Está seguro de que desea eliminar su cuenta? Esta acción es irreversible."
+
+#: users/templates/users/delete_account.html:37
+#: users/templates/users/manage_data.html:49
+#, fuzzy
+#| msgid "Delete Account"
+msgid "Delete My Account"
+msgstr "Eliminar cuenta"
+
+#: users/templates/users/friends.html:171 users/templates/users/home.html:215
+msgid "Friends"
+msgstr "Amigos"
+
+#: users/templates/users/friends.html:179
+msgid "My Friends"
+msgstr "Mis amigos"
+
+#: users/templates/users/friends.html:185 users/templates/users/profil.html:243
+msgid "Avatar of"
+msgstr "Avatar de"
+
+#: users/templates/users/friends.html:187 users/templates/users/home.html:206
+#: users/templates/users/profil.html:245
+msgid "Default Avatar"
+msgstr "Avatar predeterminado"
+
+#: users/templates/users/friends.html:198
+msgid "You don't have any friends yet."
+msgstr "Todavía no tienes amigos."
+
+#: users/templates/users/friends.html:209
+msgid "Add a Friend"
+msgstr "Añadir un amigo"
+
+#: users/templates/users/friends.html:217
+msgid "Add as Friend"
+msgstr "Añadir"
+
+#: users/templates/users/friends.html:221
+msgid "No available users to add."
+msgstr "No hay usuarios disponibles para añadir."
+
+#: users/templates/users/game_history.html:67
+#, fuzzy
+#| msgid "Game History"
+msgid "Game History for"
+msgstr "Historial de juegos"
+
+#: users/templates/users/game_history.html:73
+msgid "Pong 2D Matches"
+msgstr "Partidos de Pong 2D"
+
+#: users/templates/users/game_history.html:81
+#: users/templates/users/game_history.html:91
+#: users/templates/users/game_history.html:101
+#: users/templates/users/game_history.html:116
+#: users/templates/users/game_history.html:126
+#: users/templates/users/game_history.html:136
+#: users/templates/users/game_history.html:149
+#: users/templates/users/game_history.html:157
+msgid "No matches found."
+msgstr "No se encontraron partidos."
+
+#: users/templates/users/game_history.html:94
+#: users/templates/users/game_history.html:129
+#: users/templates/users/game_history.html:152
+msgid "Tournament Matches"
+msgstr "Partidos de Torneo"
+
+#: users/templates/users/game_history.html:108
+msgid "Pong API 2D Matches"
+msgstr "Partidos de Pong API 2D"
+
+#: users/templates/users/game_history.html:143
+msgid "Invaders Matches"
+msgstr "Partidos de Invaders"
+
+#: users/templates/users/game_history.html:144
+msgid "Solo Matches"
+msgstr "Partidos en Solitario"
+
+#: users/templates/users/home.html:191
+msgid "Menu"
+msgstr "Menú"
+
+#: users/templates/users/home.html:204
+msgid "Avatar"
+msgstr "Avatar"
+
+#: users/templates/users/home.html:212 users/templates/users/profil.html:236
+msgid "Profile"
+msgstr "Perfil"
+
+#: users/templates/users/home.html:218
+msgid "Access Chat"
+msgstr "Acceder al chat"
+
+#: users/templates/users/home.html:221
+msgid "Statistics"
+msgstr "Estadísticas"
+
+#: users/templates/users/home.html:224
+msgid "Game History"
+msgstr "Historial de juegos"
+
+#: users/templates/users/home.html:234
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+#: users/templates/users/home.html:243
+msgid "PANDAPONG 3D"
+msgstr "PANDAPONG 3D"
+
+#: users/templates/users/home.html:244
+msgid "PANDAPONG 2D"
+msgstr "PANDAPONG 2D"
+
+#: users/templates/users/home.html:245
+#, fuzzy
+#| msgid "PANDAPONG 2D"
+msgid "PANDAPONG API 2D"
+msgstr "PANDAPONG 2D"
+
+#: users/templates/users/home.html:246
+msgid "INVADERS"
+msgstr "INVADERS"
+
+#: users/templates/users/login.html:134
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: users/templates/users/login.html:149
+msgid "Log In"
+msgstr "Iniciar sesión"
+
+#: users/templates/users/login.html:152
+msgid "Not registered yet? Sign up here"
+msgstr "¿No estás registrado? Regístrate aquí"
+
+#: users/templates/users/logout.html:83
+msgid "Goodbye!!"
+msgstr "¡Adiós!"
+
+#: users/templates/users/logout.html:88
+msgid "Login Page"
+msgstr "Página de inicio de sesión"
+
+#: users/templates/users/manage_data.html:31
+msgid "Manage My Personal Data"
+msgstr "Gestionar mis datos personales"
+
+#: users/templates/users/manage_data.html:33
+msgid "You can view and manage your personal data here."
+msgstr "Puede ver y gestionar sus datos personales aquí."
+
+#: users/templates/users/manage_data.html:37
+msgid "Profile Information"
+msgstr "Información del perfil"
+
+#: users/templates/users/manage_data.html:39
+msgid "Username:"
+msgstr "Nombre de usuario:"
+
+#: users/templates/users/manage_data.html:40
+msgid "Email:"
+msgstr "Correo electrónico:"
+
+#: users/templates/users/manage_data.html:41
+msgid "Bio:"
+msgstr "Biografía:"
+
+#: users/templates/users/manage_data.html:42
+msgid "Status:"
+msgstr "Estado:"
+
+#: users/templates/users/manage_data.html:50
+#, fuzzy
+#| msgid "Anonymize Account"
+msgid "Anonymize My Account"
+msgstr "Anonimizar cuenta"
+
+#: users/templates/users/privacy_policy.html:31
+#: users/templates/users/signup.html:133
+msgid "Privacy Policy"
+msgstr "Política de privacidad"
+
+#: users/templates/users/privacy_policy.html:32
+msgid ""
+"This privacy policy explains how our organization uses the personal data we "
+"collect when you use our website."
+msgstr ""
+"Esta política de privacidad explica cómo nuestra organización utiliza los "
+"datos personales que recopilamos cuando utiliza nuestro sitio web."
+
+#: users/templates/users/privacy_policy.html:34
+msgid "What data do we collect?"
+msgstr "¿Qué datos recopilamos?"
+
+#: users/templates/users/privacy_policy.html:35
+msgid "We collect the following data:"
+msgstr "Recopilamos los siguientes datos:"
+
+#: users/templates/users/privacy_policy.html:37
+msgid ""
+"Personal identification information (Name, email address, phone number, etc.)"
+msgstr ""
+"Información de identificación personal (nombre, dirección de correo "
+"electrónico, número de teléfono, etc.)"
+
+#: users/templates/users/privacy_policy.html:40
+msgid "How do we collect your data?"
+msgstr "¿Cómo recopilamos sus datos?"
+
+#: users/templates/users/privacy_policy.html:41
+msgid ""
+"We collect most data directly from you. We collect data and process it when:"
+msgstr ""
+"Recopilamos la mayoría de los datos directamente de usted. Recopilamos datos "
+"y los procesamos cuando:"
+
+#: users/templates/users/privacy_policy.html:43
+msgid ""
+"You register online or place an order for any of our products or services."
+msgstr ""
+"Usted se registra en línea o realiza un pedido de alguno de nuestros "
+"productos o servicios."
+
+#: users/templates/users/privacy_policy.html:44
+msgid "You voluntarily use or view cookies on your browser."
+msgstr "Usted utiliza o ve voluntariamente cookies en su navegador."
+
+#: users/templates/users/privacy_policy.html:47
+msgid "How will we use your data?"
+msgstr "¿Cómo utilizaremos sus datos?"
+
+#: users/templates/users/privacy_policy.html:48
+msgid "We use your data to:"
+msgstr "Utilizamos sus datos para:"
+
+#: users/templates/users/privacy_policy.html:50
+msgid "Understand your needs and provide you with better services."
+msgstr "Entender sus necesidades y proporcionarle mejores servicios."
+
+#: users/templates/users/privacy_policy.html:51
+msgid "Send emails regarding products or services that may interest you."
+msgstr ""
+"Enviar correos electrónicos sobre productos o servicios que puedan "
+"interesarle."
+
+#: users/templates/users/privacy_policy.html:54
+msgid "Cookie Policy"
+msgstr "Política de cookies"
+
+#: users/templates/users/privacy_policy.html:55
+msgid ""
+"Cookies are text files placed on your computer to collect standard internet "
+"log information and visitor behavior information. When you visit our "
+"websites, we may automatically collect information about you through cookies "
+"or similar technology."
+msgstr ""
+"Las cookies son archivos de texto colocados en su computadora para recopilar "
+"información estándar del registro de internet y información sobre el "
+"comportamiento de los visitantes. Cuando visita nuestros sitios web, podemos "
+"recopilar automáticamente información sobre usted a través de cookies o "
+"tecnología similar."
+
+#: users/templates/users/privacy_policy.html:57
+msgid "Data Protection Rights"
+msgstr "Derechos de protección de datos"
+
+#: users/templates/users/privacy_policy.html:58
+msgid ""
+"You have rights under data protection law, including the right to request "
+"access, correction, or deletion of your personal data."
+msgstr ""
+"Usted tiene derechos bajo la ley de protección de datos, incluyendo el "
+"derecho a solicitar acceso, corrección o eliminación de sus datos personales."
+
+#: users/templates/users/privacy_policy.html:60
+msgid "To exercise these rights, please contact us."
+msgstr "Para ejercer estos derechos, por favor contáctenos."
+
+#: users/templates/users/privacy_policy.html:62
+msgid "Contact Us"
+msgstr "Contáctenos"
+
+#: users/templates/users/privacy_policy.html:62
+msgid ""
+"if you have any questions about our privacy policy or the data we hold about "
+"you."
+msgstr ""
+"si tiene alguna pregunta sobre nuestra política de privacidad o los datos "
+"que tenemos sobre usted."
+
+#: users/templates/users/profil.html:259
+msgid "Edit Information"
+msgstr "Editar información"
+
+#: users/templates/users/profil.html:305
+msgid "Choose from existing photos:"
+msgstr "Elija entre las fotos existentes:"
+
+#: users/templates/users/profil.html:325
+msgid "Or Upload Avatar"
+msgstr "O subir avatar"
+
+#: users/templates/users/profil.html:328
+msgid "Choose File"
+msgstr "Seleccionar"
+
+#: users/templates/users/profil.html:330
+#, fuzzy
+#| msgid "Delete Account"
+msgid "Delete"
+msgstr "Eliminar cuenta"
+
+#: users/templates/users/profil.html:336
+msgid "Save"
+msgstr "Guardar"
+
+#: users/templates/users/profil.html:354
+msgid "Enable 2FA"
+msgstr "Activar 2FA"
+
+#: users/templates/users/profil.html:361
+msgid "Disable 2FA"
+msgstr "Desactivar 2FA"
+
+#: users/templates/users/profil.html:368
+msgid "Anonymize Account"
+msgstr "Anonimizar cuenta"
+
+#: users/templates/users/profil.html:374
+msgid ""
+"Are you sure you want to deactivate your account? This action is "
+"irreversible."
+msgstr ""
+"¿Está seguro de que desea desactivar su cuenta? Esta acción es irreversible."
+
+#: users/templates/users/profil.html:380
+msgid "Delete Account"
+msgstr "Eliminar cuenta"
+
+#: users/templates/users/profil.html:410
+msgid "2FA is being enabled. Please follow the instructions."
+msgstr ""
+"Se está activando la autenticación de dos factores. Por favor, siga las "
+"instrucciones."
+
+#: users/templates/users/profil.html:414
+msgid "2FA is being disabled."
+msgstr "Se está desactivando la autenticación de dos factores."
+
+#: users/templates/users/setup_totp.html:97
+msgid "Two-Factor Authentication Setup"
+msgstr "Configuración de la autenticación de dos factores"
+
+#: users/templates/users/setup_totp.html:107
+msgid "Scan the QR code with your authentication app:"
+msgstr "Escanee el código QR con su aplicación de autenticación:"
+
+#: users/templates/users/setup_totp.html:112
+msgid "2FA is now activated."
+msgstr "La autenticación de dos factores está ahora activada."
+
+#: users/templates/users/signup.html:126 users/templates/users/signup.html:136
+msgid "Sign Up"
+msgstr "Registrarse"
+
+#: users/templates/users/statistics.html:106
+msgid "Statistics for"
+msgstr "Estadísticas de"
+
+#: users/templates/users/statistics.html:113
+#: users/templates/users/statistics.html:135
+#, fuzzy
+#| msgid "Statistics"
+msgid "Pong 2D Statistics"
+msgstr "Estadísticas"
+
+#: users/templates/users/statistics.html:114
+#: users/templates/users/statistics.html:123
+#: users/templates/users/statistics.html:137
+#: users/templates/users/statistics.html:144
+#, fuzzy
+#| msgid "No games played"
+msgid "Total Games Played:"
+msgstr "No se han jugado partidas"
+
+#: users/templates/users/statistics.html:115
+#: users/templates/users/statistics.html:138
+msgid "Total Wins:"
+msgstr "Total de victorias:"
+
+#: users/templates/users/statistics.html:116
+#: users/templates/users/statistics.html:139
+msgid "Total Losses:"
+msgstr "Total de derrotas:"
+
+#: users/templates/users/statistics.html:117
+#: users/templates/users/statistics.html:140
+msgid "Win/Loss Ratio:"
+msgstr "Proporción de victorias/derrotas:"
+
+#: users/templates/users/statistics.html:122
+#: users/templates/users/statistics.html:142
+#, fuzzy
+#| msgid "Friend Statistics:"
+msgid "Invaders Statistics"
+msgstr "Estadísticas de amigos:"
+
+#: users/templates/users/statistics.html:124
+#, fuzzy
+#| msgid "Last name"
+msgid "Last Score:"
+msgstr "Apellido"
+
+#: users/templates/users/statistics.html:125
+#: users/templates/users/statistics.html:145
+msgid "Best Score:"
+msgstr "Mejor Puntuación:"
+
+#: users/templates/users/statistics.html:126
+#: users/templates/users/statistics.html:146
+msgid "Average Score:"
+msgstr "Puntuación Media:"
+
+#: users/templates/users/statistics.html:132
+#, fuzzy
+#| msgid "Friends"
+msgid "Friends\\"
+msgstr "Amigos"
+
+#: users/templates/users/statistics.html:149
+msgid "No friends to display."
+msgstr "No hay amigos para mostrar."
+
+#: users/templates/users/upload_profile_photo.html:11
+msgid "Upload Photo"
+msgstr "Subir foto"
+
+#: users/validators.py:15
+msgid "Password must contain at least 8 characters."
+msgstr "La contraseña debe contener al menos 8 caracteres."
+
+#: users/validators.py:21
+msgid "Password must contain at least one uppercase letter."
+msgstr "La contraseña debe contener al menos una letra mayúscula."
+
+#: users/validators.py:27
+msgid "Password must contain at least one lowercase letter."
+msgstr "La contraseña debe contener al menos una letra minúscula."
+
+#: users/validators.py:33
+msgid "Password must contain at least one digit."
+msgstr "La contraseña debe contener al menos un dígito."
+
+#: users/validators.py:39
+msgid "Password must contain at least one special character (!@#$%^&*()-_=+)."
+msgstr ""
+"La contraseña debe contener al menos un carácter especial (!@#$%^&*()-_=+)."
+
+#: users/validators.py:46
+msgid ""
+"Your password must contain at least 8 characters, including at least one "
+"uppercase letter, one lowercase letter, one digit, and one special character "
+"(!@#$%^&*()-_=+)."
+msgstr ""
+"Su contraseña debe contener al menos 8 caracteres, incluyendo al menos una "
+"letra mayúscula, una letra minúscula, un dígito y un carácter especial (!@#$"
+"%^&*()-_=+)."
+
+#: users/views.py:150
+msgid "Invalid 2FA token."
+msgstr "Token 2FA inválido."
+
+#: users/views.py:155
+msgid "This account requires a 2FA token to log in."
+msgstr "Esta cuenta requiere un token 2FA para iniciar sesión."
+
+#: users/views.py:174
+msgid "Invalid username or password."
+msgstr "Nombre de usuario o contraseña inválido."
+
+#~ msgid "Available Chat Rooms"
+#~ msgstr "Salas de chat disponibles"
+
+#~ msgid "No rooms available"
+#~ msgstr "No hay salas disponibles"
+
+#~ msgid "Chat Room:"
+#~ msgstr "Sala de chat:"
+
+#~ msgid "Invitation to play Pong"
+#~ msgstr "Invitación para jugar Pong"
+
+#~ msgid "Start Chat"
+#~ msgstr "Iniciar"
+
+#~ msgid "2FA Management"
+#~ msgstr "Gestión de 2FA"
+
+#~ msgid "Your Statistics:"
+#~ msgstr "Sus estadísticas:"
+
+#~ msgid "Winning Streak:"
+#~ msgstr "Racha de victorias:"
+
+#~ msgid "Losing Streak:"
+#~ msgstr "Racha de derrotas:"
+
+#~ msgid "Enter username to start a private chat:"
+#~ msgstr "Introduzca un nombre de usuario para comenzar un chat privado:"
+
+#~ msgid "Enter username..."
+#~ msgstr "Ingrese un nombre de usuario..."
+
+#~ msgid "2FA Verification"
+#~ msgstr "Verificación de 2FA"
+
+#~ msgid "Please enter the verification code sent to your authentication app."
+#~ msgstr ""
+#~ "Por favor, introduce el código de verificación enviado a tu aplicación de "
+#~ "autenticación."
+
+#~ msgid "Verification Code:"
+#~ msgstr "Código de verificación:"
+
+#~ msgid "Verify"
+#~ msgstr "Verificar"
+
+#~ msgid "Username to block"
+#~ msgstr "Nombre de usuario a bloquear"
+
+#~ msgid "Invite to a Pong game"
+#~ msgstr "Invitar a un juego de Pong"
+
+#~ msgid "Username for Pong"
+#~ msgstr "Nombre de usuario para Pong"
+
+#~ msgid "Accept"
+#~ msgstr "Aceptar"

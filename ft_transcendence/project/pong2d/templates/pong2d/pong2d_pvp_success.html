@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+{% if winner == player1 %}
+
+    <style>
+        body {
+            background-image: url('{% static "images/win_lose.png" %}');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            font-family: 'Gagalin', sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            color: white;
+        }
+        h1 {
+            color: #001aa0;
+            font-size: 8rem;
+            margin-top: 200px;
+            transform: rotate(-20deg);
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+        .btn-primary, .btn-secondary {
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            width: 300px;
+            text-align: center;
+        }
+        .btn-primary, .btn-secondary {
+            background-color: #001aa0;
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            color: #001aa0;
+            background-color: white;
+        }
+        p {
+            display: none;
+        }
+    </style>
+
+{% else %}
+
+    <style>
+        body {
+            background-image: url('{% static "images/lose_win.png" %}');
+            background-size: cover;
+            background-position: center center;
+            background-attachment: fixed;
+            font-family: 'Gagalin', sans-serif;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            color: white;
+        }
+        h1 {
+            color: #001aa0;
+            font-size: 8rem;
+            margin-top: 200px;
+            transform: rotate(-20deg);
+        }
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: auto;
+            margin-bottom: 20px;
+        }
+        .btn-primary, .btn-secondary {
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            width: 300px;
+            text-align: center;
+        }
+        .btn-primary, .btn-secondary {
+            background-color: #001aa0;
+        }
+        .btn-primary:hover, .btn-secondary:hover {
+            color: #001aa0;
+            background-color: white;
+        }
+        p {
+            display: none;
+        }
+    </style>
+
+{% endif %}
+
+<body>
+
+    <div class="language-switcher">
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+    
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+    </div>
+
+    <h1>{% trans "Game Over !" %}</h1>
+
+    <p>{% trans "Winner:" %} {{ winner }}</p>
+    <p>{% trans "Player 1 Score:" %} {{ player1_score }}</p>
+    <p>{% trans "Player 2 Score:" %} {{ player2_score }}</p>
+
+    <div class="btn-container">
+
+        <a href="{% url 'pong2d_choose' %}" class="btn btn-primary">{% trans "Play Again" %}</a>
+        <a href="{% url 'home' %}" class="btn btn-secondary">{% trans "Return to Homepage" %}</a>
+
+    </div>
+
+</body>
+
+{% endblock %}

@@ -1,0 +1,250 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+    .friends-main-content {
+        width: 100%;
+        text-align: center;
+        margin-top: 20px;
+    }
+    h1 {
+        font-size: 70px;
+    }
+    .friend-left-column {
+        padding-right: 15px;
+        border: 1px solid #ccc;
+    }
+    .friend-right-column {
+        padding-left: 15px;
+        border: 1px solid #ccc;
+    }
+    .friend-avatar {
+        width: 50px;
+        height: auto;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+    .container-column {
+        overflow-y: scroll;
+        height: 500px;
+        padding-top: 10px;
+    }
+    .btn-space {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: flex-start;
+        gap: 10px;
+    }
+    
+    body {
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('/static/images/background_2.png');
+        background-size: cover;
+        color: #001aa0;
+    }
+    .column-header {
+        text-align: center;
+        width: 100%;
+        font-size: 36px;
+    }
+    h1, h2 {
+        color: #001aa0;
+    }
+    h1 {
+        margin-bottom: 20px;
+    }
+    .btn-add-friend {
+        background-color: #001aa0;
+        color: white;
+        width: 110px;
+    }
+    .btn-add-friend:hover {
+        background-color: white;
+        color: #001aa0;
+    }
+    .btn-start-friend {
+        background-color: #001aa0;
+        color: white;
+        width: 100px;
+    }
+    .btn-start-friend:hover {
+        background-color: white;
+        color: #001aa0;
+    }
+    .btn-danger {
+        background-color: #dc3545 !important;
+        color: white !important;
+        width: 100px;
+    }
+    .btn-danger:hover {
+        background-color: white !important;
+        color: #dc3545 !important;    
+    }
+    .fixed-button-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+        text-align: center;
+    }
+    .fixed-button-container a {
+        background-color: #001aa0;
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+    }
+    .fixed-button-container a:hover {
+        background-color: white;
+        color: #001aa0;
+    }
+    .status.online {
+        color: green;
+    }
+    .status.offline {
+        color: red;
+    }
+    .status.in_game {
+        color: orange;
+    }
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 4rem;
+            margin-top: 40px;
+        }
+        h2 {
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+        .container-column {
+            height: 200px;
+            padding: 5px;
+            width: 80%;
+            margin: 10px auto;
+        }
+        .friend-right-column {
+            margin-left: 40px;
+        }
+        .btn-space {
+            flex-direction: column;
+        }
+        .fixed-button-container {
+            position: relative;
+            bottom: auto;
+            left: auto;
+            right: auto;
+            padding: 8px 0;
+        }
+    }
+
+</style>
+
+<body>
+
+    <div class="language-switcher">
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+    </div>
+    
+    <div class="container-fluid">
+        <div class="friends-main-content">
+            <h1>{% trans 'Friends' %}</h1>
+        </div> 
+
+        <div class="row justify-content-center">
+            <div class="col-1"></div>
+            
+            <!-- Colonne de gauche -->
+            <div class="col-md-4 col-12 container-column friend-left-column">
+                <h2 class="column-header">{% trans "My Friends" %}</h2>
+                <ul>
+                    {% for friend in friends %}
+
+                    <li>
+                        {% if friend.user.profile.avatar %}
+                            <img src="{{ friend.user.profile.avatar.url }}" alt="{% trans 'Avatar of' %} {{ friend.user.username }}" class="friend-avatar">
+                        {% else %}
+                            <img src="{% static 'images/avatars/avatar_0.png' %}" alt="{% trans 'Default Avatar' %}" class="friend-avatar">
+                        {% endif %}
+                        {{ friend.user.username }} - <span class="status {{ friend.status|lower }}">{{ friend.get_status_display }}</span>
+                        <div class="btn-space">
+                            <form method="post" action="{% url 'remove_friend' friend.pk %}">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">{% trans "Remove" %}</button>
+                            </form>
+                        </div>
+                    </li>
+                    
+                    <li>{% trans "You don't have any friends yet." %}</li>
+
+                    {% endfor %}
+                </ul>
+            </div>
+
+
+            <div class="col-1"></div>
+
+            <!-- Colonne de droite -->
+            <div class="col-md-4 col-12 container-column friend-right-column">
+                <h2 class="column-header">{% trans "Add a Friend" %}</h2>
+                <ul>
+                    {% for non_friend in non_friends %}
+                    <li>
+                        {{ non_friend.username }}
+                        <form method="post" action="{% url 'add_friend' non_friend.pk %}" class="btn-space">
+                            {% csrf_token %}
+                            <input type="hidden" name="add" value="{{ non_friend.id }}">
+                            <button type="submit" class="btn btn-success btn-sm btn-add-friend">{% trans "Add as Friend" %}</button>
+                        </form>
+                    </li>
+                    {% empty %}
+                    <p>{% trans "No available users to add." %}</p>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="col-1"></div>
+        </div>
+    </div>
+
+    <div class="fixed-button-container">
+        <a href="{% url 'home' %}" class="btn btn-primary">
+            {% trans "Return to Homepage" %}
+        </a>
+    </div>
+
+</body>
+
+<script>
+    setInterval(function() {
+        $.ajax({
+            url: '/api/status/',
+            success: function(data) {
+                updateStatusDisplay(data);
+            }
+        });
+    }, 5000);
+
+</script>
+
+{% endblock %}

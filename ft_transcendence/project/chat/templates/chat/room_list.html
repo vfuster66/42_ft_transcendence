@@ -1,0 +1,174 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+    body {
+        background-image: url('/static/images/background_1.png');
+        background-size: cover;
+        background-position: center;
+        font-family: 'Gagalin', sans-serif;
+        color: #32C0C1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+        margin: 0;
+        padding-bottom: 50px;
+    }
+    h1 {
+        font-size: 5rem;
+        text-align: center;
+        margin-bottom: 30px;
+        margin-top: 50px;
+    }
+    h2 {
+        margin-bottom: 20px;
+    }
+    .chat-container {
+        width: 90%;
+        max-width: 800px;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 150px;
+    }
+    .create-room-container {
+        flex: 1;
+        text-align: center;
+    }
+    .create-room {
+        display: block;
+        margin: 0 auto;
+        background-color: #32C0C1;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+    .room-list, .create-room-container {
+        width: 48%;
+    }
+    .fixed-button-container {
+        margin-top: 20px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+    }
+    .fixed-button-container a {
+        background-color: #32C0C1;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .fixed-button-container a:hover {
+        background-color: white;
+        color: #32C0C1;
+    }
+    li a {
+        color: #32C0C1;
+        text-decoration: none;
+    }
+    li a:hover {
+        text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 4rem;
+            margin-top: 50px;
+            margin-bottom: 0;
+        }
+        h2 {
+            text-align: center;
+        }
+        .chat-container {
+            flex-direction: column;
+            margin-top: 100px;
+            align-items: center;
+        }
+        .room-list, .create-room-container {
+            margin-right: 0;
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        .create-room-container {
+            text-align: center;
+        }
+        .fixed-button-container a {
+            font-size: 1.2rem;
+        }
+        .fixed-button-container {
+            position: relative;
+            bottom: auto;
+            left: auto;
+            right: auto;
+            padding: 8px 0;
+        }
+        ul {
+            margin-left: 50px;
+        }
+    }
+</style>
+
+<body>
+    <div class="language-switcher">
+		<button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			{% translate "Language" %}
+		</button>
+		<form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+			{% csrf_token %}
+			<input name="next" type="hidden" value="{{ request.path }}">
+			<button type="submit" name="language" value="en" class="dropdown-item">
+				<img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+			</button>
+			<button type="submit" name="language" value="fr" class="dropdown-item">
+				<img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+			</button>
+			<button type="submit" name="language" value="es" class="dropdown-item">
+				<img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+			</button>
+		</form>
+	</div>
+
+    <h1>{% trans 'Chat' %}</h1>
+
+    <div class="chat-container">
+        <!-- Room list -->
+        <div class="room-list">
+            <h2>{% trans "Chat Rooms List" %}</h2>
+            <ul>
+                {% for room in rooms %}
+                <li>
+                    <a href="{% url 'room_detail' room.name %}">{{ room.name }}</a>
+                    {% if room.is_private %} <span class="badge badge-info">{% trans "Private" %}</span> {% endif %}
+                </li>
+                {% empty %}
+                <li>{% trans "No rooms available." %}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Create room form -->
+        <div class="create-room-container">
+            <h2>{% trans "Create a new room" %}</h2>
+            <form method="post" action="{% url 'create_room' %}">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="create-room">{% trans "Create" %}</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="fixed-button-container">
+        <a href="{% url 'home' %}" class="btn btn-primary">
+            {% trans "Return to Homepage" %}
+        </a>
+    </div>
+</body>
+
+{% endblock %}

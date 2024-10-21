@@ -1,0 +1,173 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('/static/images/background_1.png');
+        background-size: cover;
+        color: #32C0C1;
+    }
+    h1 {
+        font-size: 50px;
+        text-align: center;
+        margin-bottom: 20px;
+        margin-top: 20px;
+    }
+    .stats-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 10px;
+    }
+    .stats-box {
+        margin-bottom: 20px;
+        padding: 20px;
+        border: 2px solid #3498db;
+        border-radius: 8px;
+        background: rgba(0, 0, 0, 0.7);
+    }
+    h2 {
+        color: #3498db;
+        margin-top: 0;
+    }
+    p, li {
+        font-size: 18px;
+    }
+</style>
+
+<body>
+
+    <div class="language-switcher">
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+    
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+    </div>
+
+    <h1>{% trans 'Game History for' %} {{ request.user.username }}</h1>
+
+    <div class="stats-container">
+
+        <!-- Pong 2D -->
+        <div class="stats-box">
+            <h2>{% trans 'Pong 2D Matches' %}</h2>
+            <h3>{% trans 'Player vs Player' %}</h3>
+            <ul>
+                {% for game in pong2d_games_pvp %}
+                    {% if game.player1_score != 0 or game.player2_score != 0 %}
+                        <li>{{ game.game_date }} - {{ game.player1 }} vs {{ game.player2 }} - Score: {{ game.player1_score }} : {{ game.player2_score }} - Winner: {{ game.winner }}</li>
+                    {% endif %}
+                {% empty %}
+                    <li>{% trans 'No matches found.' %}</li>
+                {% endfor %}
+            </ul>
+            <h3>{% trans 'Player vs AI' %}</h3>
+            <ul>
+                {% for game in pong2d_games_vs_ai %}
+                    {% if game.player1_score != 0 or game.player2_score != 0 %}
+                        <li>{{ game.game_date }} - Player: {{ game.player1 }} - Score: {{ game.player1_score }} : {{ game.player2_score }} - Winner: {{ game.winner }}</li>
+                    {% endif %}
+                {% empty %}
+                    <li>{% trans 'No matches found.' %}</li>
+                {% endfor %}
+            </ul>
+            <h3>{% trans 'Tournament Matches' %}</h3>
+            <ul>
+                {% for game in pong2d_tournament_games %}
+                    {% if game.player1_score != 0 or game.player2_score != 0 %}
+                        <li>{{ game.game_date }} - {{ game.player1 }} vs {{ game.player2 }} - Score: {{ game.player1_score }} : {{ game.player2_score }} - Winner: {{ game.winner }} - Tournament: {{ game.tournament.name }}</li>
+                    {% endif %}
+                {% empty %}
+                    <li>{% trans 'No matches found.' %}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Pong API 2D -->
+        <div class="stats-box">
+            <h2>{% trans 'Pong API 2D Matches' %}</h2>
+            <h3>{% trans 'Player vs Player' %}</h3>
+            <ul>
+                {% for game in pongapi2d_games_pvp %}
+                    {% if game.player1_score != 0 or game.player2_score != 0 %}
+                        <li>{{ game.game_date }} - {{ game.player1 }} vs {{ game.player2 }} - Score: {{ game.player1_score }} : {{ game.player2_score }} - Winner: {{ game.winner }}</li>
+                    {% endif %}
+                {% empty %}
+                    <li>{% trans 'No matches found.' %}</li>
+                {% endfor %}
+            </ul>
+            <h3>{% trans 'Player vs AI' %}</h3>
+            <ul>
+                {% for game in pongapi2d_games_vs_ai %}
+                    {% if game.player1_score != 0 or game.player2_score != 0 %}
+                        <li>{{ game.game_date }} - Player: {{ game.player1 }} - Score: {{ game.player1_score }} : {{ game.player2_score }} - Winner: {{ game.winner }}</li>
+                    {% endif %}
+                {% empty %}
+                    <li>{% trans 'No matches found.' %}</li>
+                {% endfor %}
+            </ul>
+            <h3>{% trans 'Tournament Matches' %}</h3>
+            <ul>
+                {% for game in pongapi2d_tournament_games %}
+                    {% if game.player1_score != 0 or game.player2_score != 0 %}
+                        <li>{{ game.game_date }} - {{ game.player1 }} vs {{ game.player2 }} - Score: {{ game.player1_score }} : {{ game.player2_score }} - Winner: {{ game.winner }} - Tournament: {{ game.tournament.name }}</li>
+                    {% endif %}
+                {% empty %}
+                    <li>{% trans 'No matches found.' %}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Invaders -->
+        <div class="stats-box">
+            <h2>{% trans 'Invaders Matches' %}</h2>
+            <h3>{% trans 'Solo Matches' %}</h3>
+            <ul>
+                {% for invader in invaders_players %}
+                    <li>{{ invader.game.game_date }} - Player: {{ invader.player }} - Score: {{ invader.score }}</li>
+                {% empty %}
+                    <li>{% trans 'No matches found.' %}</li>
+                {% endfor %}
+            </ul>
+            <h3>{% trans 'Tournament Matches' %}</h3>
+            <ul>
+                {% for game in invaders_tournament_games %}
+                    <li>{{ game.game_date }} - Player: {{ game.player1 }} - Score: {{ game.player1_score }}</li>
+                {% empty %}
+                    <li>{% trans 'No matches found.' %}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+    </div>
+
+    <!-- Fixed button for returning to homepage -->
+    <div class="fixed-button-container">
+        <a href="{% url 'home' %}" class="btn btn-primary">
+            {% trans "Return to Homepage" %}
+        </a>
+    </div>
+
+</body>
+
+{% endblock %}

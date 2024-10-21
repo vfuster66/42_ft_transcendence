@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+
+	.logout {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: flex-end;
+		font-family: var(--main-font);
+		color: var(--primary-color);
+		min-height: 100vh;
+		background-size: cover;
+		background-image: url('/static/images/logout.png');
+		padding-bottom: 0;
+		padding-right: 20px;
+	}
+
+	.logout h1 {
+		font-size: 7.5rem;
+		margin-bottom: 0;
+	}
+
+	.logout a {
+		font-size: 1rem; 
+		display: block;
+		margin-top: -10px;
+		padding-right: 250px;
+		width: max-content;
+		align-self: center; 
+		margin-bottom: 10px;
+	}
+	@media (max-width: 768px) {
+		.logout {
+			padding-right: 10px;
+			align-items: left;
+		}
+
+		.logout h1 {
+			font-size: 3.5rem;
+			text-align: left;
+			margin-top: 40px;
+		}
+
+		.logout a {
+			font-size: 1.2rem;
+			padding: 0;
+		}
+	}
+
+</style>
+
+<body>
+
+	<div class="language-switcher">
+		<button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+			aria-haspopup="true" aria-expanded="false">
+			{% translate "Language" %}
+		</button>
+	
+		<form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+			{% csrf_token %}
+			<input name="next" type="hidden" value="{{ request.path }}">
+			<button type="submit" name="language" value="en" class="dropdown-item">
+				<img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+			</button>
+			<button type="submit" name="language" value="fr" class="dropdown-item">
+				<img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+			</button>
+			<button type="submit" name="language" value="es" class="dropdown-item">
+				<img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+			</button>
+		</form>
+	</div>
+
+	<div class="logout">
+
+		<h1>{% trans "Goodbye!!" %}</h1>
+
+		<form method="post">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<a href="{% url 'connexion' %}">{% trans "Login Page" %}</a>
+		</form>
+
+	</div>
+
+</body>
+
+{% endblock %}

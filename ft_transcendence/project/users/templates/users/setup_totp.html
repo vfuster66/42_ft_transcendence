@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('/static/images/background_2.png');
+        background-size: cover;
+        color: #001aa0;
+        background-position: center center;
+        color: #001aa0;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+    h1 {
+        margin-top: -100px;
+        margin-bottom: 100px;
+        font-size: 3rem;
+    }
+    .fixed-button-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+        text-align: center;
+    }
+    .fixed-button-container a {
+        background-color: #001aa0;
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+    }
+    .fixed-button-container a:hover {
+        background-color: white;
+        color: #001aa0;
+    }
+    img.qr-code {
+        width: 300px;
+        height: auto;
+        border: 5px solid #001aa0;
+    }
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 2rem;
+            margin-top: 10px;
+        }
+        p {
+            font-size: 1.5rem;
+        }
+        .fixed-button-container a {
+            font-size: 1.2rem;
+        }
+        .fixed-button-container {
+            position: relative;
+            bottom: auto;
+            left: auto;
+            right: auto;
+            padding: 8px 0;
+        }
+        img.qr-code {
+            width: 200px;
+        }
+    }
+</style>
+
+<body>
+
+    <div class="language-switcher">
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+    
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+    </div>
+    
+    <h1>{% trans "Two-Factor Authentication Setup" %}</h1>
+
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <p>{% trans "Scan the QR code with your authentication app:" %}</p>
+
+    <img src="data:image/png;base64,{{ qr_code_url }}" alt="QR Code" class="qr-code">
+
+    <p class="confirmation-message">
+        {% trans "2FA is now activated." %}
+    </p>
+
+    <!-- Fixed button for returning to profile -->
+    <div class="fixed-button-container">
+        <a href="{% url 'profile_view' %}" class="btn btn-primary">
+            {% trans "Return to Profile" %}
+        </a>
+    </div>
+
+</body>
+
+{% endblock %}
+

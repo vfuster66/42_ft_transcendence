@@ -1,0 +1,159 @@
+
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+    .container-login {
+        font-family: var(--main-font);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-image: url('/static/images/background_2.png');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        min-width: 100vw;
+        padding: 50px 0;
+    }
+    .h2-login {
+        color: var(--primary-color);
+        font-size: 6rem;
+        margin-top: -50px;
+        margin-bottom: 3rem;
+    }
+    .container-login form {
+        width: 100%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .container-login form p {
+        width: 100%;
+        margin: 0;
+        color: var(--primary-color);
+    }
+    .container-login form p label {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    .container-login input[type='text'],
+    .container-login input[type='password'] {
+        width: 100%;
+        font-size: 1.5rem;
+        padding: 10px;
+        margin-bottom: 1rem;
+        border: 2px solid var(--primary-color);
+        border-radius: 10px;
+        color: var(--primary-color);
+    }
+    .login-button {
+        font-size: 2rem;
+        padding: 15px 30px;
+        border: none;
+        border-radius: 30px;
+        color: white;
+        background-color: var(--secondary-color);
+        margin-top: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+    .login-button:hover {
+        background-color: var(--primary-color);
+        transform: scale(1.05);
+    }
+    .login-link {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        text-decoration: none;
+        margin-top: 20px;
+    }
+    .login-link:hover {
+        color: var(--secondary-color);
+        text-decoration: underline;
+    }
+    @media (max-width: 768px) {
+        .h2-login {
+            font-size: 3rem;
+            margin-top: 0;
+            margin-bottom: 2rem;
+        }
+        .container-login form {
+            width: 90%;
+        }
+        .container-login input[type='text'],
+        .container-login input[type='password'] {
+            font-size: 1.2rem;
+            padding: 8px;
+        }
+        .login-button {
+            font-size: 1.5rem;
+            padding: 10px 20px;
+        }
+        .login-link {
+            font-size: 1.2rem;
+        }
+        .container-login {
+            padding: 30px 0;
+        }
+    }
+</style>
+
+<body>
+   
+    <div class="language-switcher">
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+    
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+    </div>
+    
+    <div class="container-login">
+    
+        <h2 class="h2-login">{% trans "Login" %}</h2>
+    
+        <form method="post">
+            {% csrf_token %}
+            <p><label for="{{ form.username.id_for_label }}">{{ form.username.label }}</label>
+                {{ form.username }}
+            </p>
+            <p><label for="{{ form.password.id_for_label }}">{{ form.password.label }}</label>
+                {{ form.password }}
+            </p>
+            {% if request.session.show_token %}
+                <p><label for="{{ form.token.id_for_label }}">{{ form.token.label }}</label>
+                    {{ form.token }}
+                </p>
+            {% endif %}
+            <button type="submit" class="login-button">{% trans "Log In" %}</button>
+        </form>        
+    
+        <a class="login-link" href="{% url 'signup' %}">{% trans "Not registered yet? Sign up here" %}</a>
+    
+    </div>
+
+</body>
+
+{% endblock %}
+

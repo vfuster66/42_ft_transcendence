@@ -1,0 +1,156 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('/static/images/background_2.png');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        color: #001aa0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        margin: 0;
+        flex-direction: column;
+    }
+    h1 {
+        color: #001aa0;
+        font-size: 6rem;
+    }
+    .form-check {
+        display: flex;
+        align-items: center;
+        margin-bottom: 0.5rem;
+    }
+    .form-check input {
+        margin-right: 0.5rem;
+    }
+    .form-check label {
+        font-size: 1.25rem;
+    }
+    .button-container {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+        width: 100%;
+        justify-content: center;
+    }
+    .button-container button {
+        flex: 1;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
+        background-color: #001aa0;
+        border: none;
+        color: white;
+        cursor: pointer;
+        width: 250px;
+        border-radius: 5px;
+    }
+    .button-container button:hover {
+        background-color: #001aa0;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .fixed-button-container {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+        text-align: center;
+    }
+    .fixed-button-container a {
+        background-color: #001aa0;
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+    }
+    .fixed-button-container a:hover {
+        background-color: white;
+        color: #001aa0;
+    }
+</style>
+
+<body>
+
+    <div class="language-switcher">
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+    
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+    </div>
+    
+    <h1>{% trans 'Create Tournament' %}</h1>
+
+    <form method="post" id="manual-selection-form">
+        {% csrf_token %}
+        <h2>{% trans 'Select participants:' %}</h2>
+        {% for user in online_users %}
+            <div class="form-check">
+                <input type="checkbox" name="participants" value="{{ user.user.id }}" id="user-{{ user.user.id }}">
+                <label for="user-{{ user.user.id }}">{{ user.display_name }}</label>
+            </div>
+        {% endfor %}
+        <div class="button-container">
+            <button type="submit">{% trans 'Create Tournament' %}</button>
+            <button type="button" id="matchmaking-button">{% trans 'Matchmaking' %}</button>
+        </div>
+    </form>
+
+    <div class="fixed-button-container">
+        <a href="{% url 'home' %}" class="btn btn-primary">
+            {% trans "Return to Homepage" %}
+        </a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded and parsed');
+
+            document.getElementById('matchmaking-button').addEventListener('click', function() {
+                fetch('{% url "matchmaking_api" %}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': '{{ csrf_token }}'
+                    },
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        window.location.href = data.redirect_url;
+                    } else {
+                        alert('Error: ' + data.message);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+            });
+        });
+    </script>
+</body>
+
+{% endblock %}
+

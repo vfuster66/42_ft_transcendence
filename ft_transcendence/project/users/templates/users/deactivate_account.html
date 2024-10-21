@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<div class="language-switcher">
+    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {% translate "Language" %}
+    </button>
+
+    <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.path }}">
+        <button type="submit" name="language" value="en" class="dropdown-item">
+            <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+        </button>
+        <button type="submit" name="language" value="fr" class="dropdown-item">
+            <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+        </button>
+        <button type="submit" name="language" value="es" class="dropdown-item">
+            <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+        </button>
+    </form>
+</div>
+
+<div class="container">
+
+    <h1>{% trans "Confirm Account Deactivation" %}</h1>
+
+    <p>{% trans "Are you sure you want to deactivate your account? You will be able to reactivate it via an administrator." %}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-warning">{% trans "Deactivate Account" %}</button>
+        <a href="{% url 'profile' %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+    </form>
+
+</div>
+
+{% endblock %}
+

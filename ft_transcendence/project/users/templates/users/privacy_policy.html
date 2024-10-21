@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('/static/images/background_2.png');
+        background-size: cover;
+        color: #001aa0;
+    }
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .language-switcher {
+        text-align: right;
+    }
+    .language-switcher button {
+        margin-bottom: 20px;
+    }
+    h1, h2 {
+        color: #007bff;
+    }
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+    }
+    h2 {
+        font-size: 1.75rem;
+        margin-top: 30px;
+    }
+    p, ul {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    ul {
+        padding-left: 20px;
+    }
+    ul li {
+        list-style-type: disc;
+    }
+    .dropdown-menu img {
+        width: 20px;
+        margin-right: 10px;
+    }
+    @media (max-width: 768px) {
+        .container {
+            margin: 20px;
+            padding: 15px;
+        }
+        h1 {
+            font-size: 2rem;
+        }
+        h2 {
+            font-size: 1.5rem;
+        }
+    }
+</style>
+
+<div class="language-switcher">
+    <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+        aria-haspopup="true" aria-expanded="false">
+        {% translate "Language" %}
+    </button>
+
+    <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+        {% csrf_token %}
+        <input name="next" type="hidden" value="{{ request.path }}">
+        <button type="submit" name="language" value="en" class="dropdown-item">
+            <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+        </button>
+        <button type="submit" name="language" value="fr" class="dropdown-item">
+            <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+        </button>
+        <button type="submit" name="language" value="es" class="dropdown-item">
+            <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+        </button>
+    </form>
+</div>
+
+<div class="container mt-4">
+
+    <h1>{% trans "Privacy Policy" %}</h1>
+    <p>{% trans "This privacy policy explains how our organization uses the personal data we collect when you use our website." %}</p>
+
+    <h2>{% trans "What data do we collect?" %}</h2>
+    <p>{% trans "We collect the following data:" %}</p>
+    <ul>
+        <li>{% trans "Personal identification information (Name, email address, phone number, etc.)" %}</li>
+    </ul>
+
+    <h2>{% trans "How do we collect your data?" %}</h2>
+    <p>{% trans "We collect most data directly from you. We collect data and process it when:" %}</p>
+    <ul>
+        <li>{% trans "You register online or place an order for any of our products or services." %}</li>
+        <li>{% trans "You voluntarily use or view cookies on your browser." %}</li>
+    </ul>
+
+    <h2>{% trans "How will we use your data?" %}</h2>
+    <p>{% trans "We use your data to:" %}</p>
+    <ul>
+        <li>{% trans "Understand your needs and provide you with better services." %}</li>
+        <li>{% trans "Send emails regarding products or services that may interest you." %}</li>
+    </ul>
+
+    <h2>{% trans "Cookie Policy" %}</h2>
+    <p>{% trans "Cookies are text files placed on your computer to collect standard internet log information and visitor behavior information. When you visit our websites, we may automatically collect information about you through cookies or similar technology." %}</p>
+    
+    <h2>{% trans "Data Protection Rights" %}</h2>
+    <p>{% trans "You have rights under data protection law, including the right to request access, correction, or deletion of your personal data." %}</p>
+
+    <p>{% trans "To exercise these rights, please contact us." %}</p>
+
+    <p><strong>{% trans "Contact Us" %}</strong> {% trans "if you have any questions about our privacy policy or the data we hold about you." %}</p>
+
+</div>
+
+
+{% endblock %}
+
+
+

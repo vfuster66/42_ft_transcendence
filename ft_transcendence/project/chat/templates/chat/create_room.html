@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+
+<style>
+    body {
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('/static/images/background_2.png');
+        background-size: cover;
+        color: #001aa0;
+        height: 100vh;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+
+    }
+    h1 {
+        font-size: 5rem;
+        text-align: center;
+        margin-top: 80px;
+        margin-bottom: 50px;
+    }
+    p {
+        text-align: center;
+    }
+    .container {
+        width: 90%;
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .form {
+        width: 100%;
+    }
+    .fixed-button-container {
+        margin-top: 20px;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        padding: 10px;
+    }
+    .fixed-button-container a {
+        background-color: #001aa0;
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+    }
+    .fixed-button-container a:hover {
+        background-color: white;
+        color: #001aa0;
+    }
+    .create-button {
+        background-color: #001aa0;
+        color: white;
+    }
+    .create-button:hover {
+        background-color: white;
+        color: #001aa0;
+    }
+    @media (max-width: 768px) {
+        h1 {
+            font-size: 3rem;
+            margin-top: 10px;
+            margin-bottom: 30px;
+        }
+        .container {
+            width: 80%;
+        }
+        .fixed-button-container a {
+            font-size: 1.2rem;
+        }
+        .fixed-button-container {
+            position: relative;
+            bottom: auto;
+            left: auto;
+            right: auto;
+            padding: 8px 0;
+        }
+    }
+</style>
+
+<body>
+
+    <div class="language-switcher">
+		<button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			{% translate "Language" %}
+		</button>
+		<form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+			{% csrf_token %}
+			<input name="next" type="hidden" value="{{ request.path }}">
+			<button type="submit" name="language" value="en" class="dropdown-item">
+				<img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+			</button>
+			<button type="submit" name="language" value="fr" class="dropdown-item">
+				<img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+			</button>
+			<button type="submit" name="language" value="es" class="dropdown-item">
+				<img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+			</button>
+		</form>
+	</div>
+
+    <h1>{% trans "Create new Room" %}</h1>
+    <p>{% trans "Please fill out the information below to create a new room." %}</p>
+    <div class="container">
+        {% if messages %}
+            <div class="alert alert-info">
+                {% for message in messages %}
+                    <p{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        <form method="post" action="{% url 'create_room' %}" class="form">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary create-button">{% trans "Create" %}</button>
+        </form>
+    </div>
+
+    <div class="fixed-button-container">
+        <a href="{% url 'home' %}" class="btn btn-primary">
+            {% trans "Return to Rooms List" %}
+        </a>
+    </div>
+</body>
+{% endblock %}
+

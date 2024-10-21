@@ -1,0 +1,95 @@
+#version: '3.8'
+
+services:
+  postgres:
+    build:
+      context: ./postgres/
+    image: "s_postgresql"
+    container_name: postgres
+    networks:
+      - back_v
+    environment:
+      POSTGRES_DB: ${POSTGRES_NAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    restart: unless-stopped
+    volumes:
+      - ./volumes/pg_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_NAME}"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  back:
+    container_name: project
+    build: ./project/
+    image: "s_django"
+    env_file:
+      - .env
+    restart: always
+    networks:
+      - back_v
+    volumes:
+      - ./project/app/:/usr/src/app/
+      - static_volume:/project/staticfiles
+      - ./project/logs:/project/logs 
+    ports:
+      - "${DJANGO_PORT}:${DJANGO_PORT}"
+    expose:
+      - "8000"
+    environment:
+      - DJANGO_ALLOWED_HOSTS=pandapong.ninja
+      - DATABASE_HOST=postgres
+      - DATABASE_NAME=${POSTGRES_NAME}
+      - DATABASE_USER=${POSTGRES_USER}
+      - DATABASE_PASSWORD=${POSTGRES_PASSWORD}
+    depends_on:
+      - postgres
+      - redis
+
+  nginx:
+    container_name: nginx
+    build: ./nginx
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf:ro
+      - ./ssl/pandapong.pem:/etc/ssl/certs/pandapong.pem:ro
+      - ./ssl/pandapong.key:/etc/ssl/private/pandapong.key:ro
+      - ./nginx:/var/www/html
+      - static_volume:/project/staticfiles
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - back
+    networks:
+      - back_v
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    networks:
+      - back_v
+    ports:
+      - "6380:6379"
+
+volumes:
+  pg_data:
+    name: pg_data
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: ./volumes/pg_data
+  static_volume:
+
+networks:
+  back_v:
+    driver: bridge
+    name: back_v

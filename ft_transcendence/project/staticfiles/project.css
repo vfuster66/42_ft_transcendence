@@ -1,0 +1,67 @@
+/* General */
+
+:root {
+	--main-font: 'Gagalin', sans-serif;
+	--primary-color: #001aa0;
+	--secondary-color: #32C0C1;
+}
+
+@font-face {
+	font-family: 'Gagalin';
+	src: url('/static/fonts/gagalin-webfont.woff2') format('woff2'),
+		 url('/static/fonts/gagalin-webfont.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+body {
+	font-family: var(--main-font);
+}
+
+.curved-text {
+	font-family: 'Gagalin';
+	font-size: 3rem;
+	color: white;
+}
+
+/* gestion des langues */
+.language-switcher {
+	position: fixed;
+	right: 20px;
+	top: 20px;
+	z-index: 1050;
+}
+
+.language-switcher .btn {
+	width: 100px;
+}
+
+.language-switcher .dropdown-menu {
+	width: 100%;
+	min-width: 100px;
+	background-color: rgba(255, 255, 255, 0.5);
+}
+
+.language-switcher .dropdown-item {
+	text-align: center;
+	white-space: nowrap;
+	display: block;
+	padding: 0.25rem 0;
+}
+
+.language-switcher .dropdown-item img {
+	margin: auto;
+	display: block;
+}
+
+@media (max-width: 480px) {
+	.curved-text {
+		font-size: 1.5rem;
+	}
+
+	.language-switcher {
+		top: 10px;
+		right: 10px;
+		position: absolute;
+	}
+}

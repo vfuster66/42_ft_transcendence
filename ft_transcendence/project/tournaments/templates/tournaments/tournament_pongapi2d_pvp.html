@@ -1,0 +1,151 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block content %}
+<style>
+    #gameCanvas {
+        border: 1px solid #000;
+        margin-top: 15px;
+        width: 100%;
+        max-width: 800px;
+        height: auto;
+    }
+    body {
+        text-align: center;
+        padding-top: 2rem;
+        font-family: 'Gagalin', sans-serif;
+        background-image: url('{% static "images/background_1.png" %}');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: fixed;
+        height: 100vh;
+        margin: 0;
+    }
+    .container-fluid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+    .player-info {
+        position: absolute;
+        top: 20%;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        z-index: 10;
+    }
+    #player1-info {
+        justify-content: flex-start;
+        margin-left: 30px;
+        margin-top: 20px;
+    }
+    #player2-info {
+        justify-content: flex-end;
+        margin-right: 30px;
+        margin-top: 20px;
+    }
+    .player-info img {
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+    }
+    .player-info p {
+        font-size: 18px;
+        color: white;
+        margin-top: 10px;
+    }
+    h1 {
+        font-size: 4rem;
+        color: #32C0C1;
+        text-align: center;
+        margin-top: 10px;
+    }
+    .btn-primary {
+        color: white;
+        background-color: #32C0C1;
+        padding: 0.375rem 0.75rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        border-radius: 0.25rem;
+        cursor: pointer;
+        margin-bottom: 30px;
+    }
+    .btn-primary:hover {
+        color: #32C0C1;
+        background-color: white;
+    }
+</style>
+
+<body>
+
+    <div class="language-switcher">
+        <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            {% translate "Language" %}
+        </button>
+    
+        <form action="{% url 'set_language' %}" method="post" class="dropdown-menu dropdown-menu-end p-2">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.path }}">
+            <button type="submit" name="language" value="en" class="dropdown-item">
+                <img src="{% static 'images/en_flag.png' %}" alt="{% translate 'English' %}">
+            </button>
+            <button type="submit" name="language" value="fr" class="dropdown-item">
+                <img src="{% static 'images/fr_flag.png' %}" alt="{% translate 'Français' %}">
+            </button>
+            <button type="submit" name="language" value="es" class="dropdown-item">
+                <img src="{% static 'images/es_flag.png' %}" alt="{% translate 'Castellano' %}">
+            </button>
+        </form>
+    </div>
+
+    <h1>PandaPong Api 2D Tournament</h1>
+
+    <div class="player-info">
+        <div id="player1-info">
+            <img id="player1-avatar" src="{{ player1.avatar_url }}" alt="Player 1 Avatar">
+            <p id="player1-name">{{ player1.user }}</p>
+        </div>
+        <div id="player2-info">
+            <img id="player2-avatar" src="{{ player2.avatar_url }}" alt="Player 2 Avatar">
+            <p id="player2-name">{{ player2.user }}</p>
+        </div>
+    </div>
+
+    <canvas id="gameCanvas"></canvas>
+    
+    <div class="fixed-button-container">
+        <a href="{% url 'home' %}" class="btn btn-primary">
+            {% trans "Return to Homepage" %}
+        </a>
+    </div>
+</body>
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        window.isTournamentMode = "{{ is_tournament_mode|yesno:'true,false' }}" === 'true';
+        window.tournamentId = "{{ tournament_id }}";
+        window.matchId = "{{ match_id }}";
+        window.player1Id = "{{ player1_id }}";
+        window.player2Id = "{{ player2_id }}";
+
+        if (window.isTournamentMode) {
+            var script = document.createElement('script');
+            script.src = "{% static 'pongapi2d/pongapi2d_tournament.js' %}";
+            document.head.appendChild(script);
+        } else {
+            var script = document.createElement('script');
+            script.src = "{% static 'pongapi2d/pongapi2d_pvp.js' %}";
+            document.head.appendChild(script);
+        }
+    });
+</script>
+{% endblock %}
+
